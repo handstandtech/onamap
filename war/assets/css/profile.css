@@ -1,0 +1,69 @@
+table {
+	width: 100%;
+	height: 100%;
+	border-collapse: collapse;
+}
+
+table td {
+	margin: 0px;
+	padding: 0px;
+}
+
+#google-map {
+	width: 100%;
+	height: 100%;
+}
+
+#us-map-svg {
+	background: #FFF;
+	width: 100%;
+	height: 100%;
+}
+
+#header {
+	height: 50px;
+	overflow: hidden;
+	border-bottom: 1px solid #333;
+}
+
+.middle {
+	
+}
+
+#tdcontent {
+	height: 100%;
+}
+
+#content {
+	overflow-x: hidden; /* or overflow: hidden; */
+	overflow-y: auto;
+	height: 100%;
+	position: relative;
+	height: 100%;
+}
+
+#bottom {
+	height: 0px;
+	overflow: auto;
+	border-top: 1px solid #333;
+}
+
+#tabs {
+	float: right;
+	margin: 0px;
+	padding: 0px;
+}
+
+#tabs li {
+	display: block;
+	cursor: pointer;
+	background: gray;
+	float: left;
+	margin: 0px;
+	padding: 4px;
+	margin-right: 10px;
+}
+
+#tabs li:hover {
+	background: pink;
+}

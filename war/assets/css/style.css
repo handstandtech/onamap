@@ -1,0 +1,130 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
+	{
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol,ul {
+	list-style: none;
+}
+
+blockquote,q {
+	quotes: none;
+}
+
+blockquote:before,blockquote:after,q:before,q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/** STYLE **/
+body,html {
+	margin: 0px;
+	padding: 0px;
+	background: #F1F1F1;
+	background: #E5ECF9;
+	color: #111111;
+	font-family: 'Helvetica Neue', Helvetica;
+	font-size: 12px;
+}
+
+h1 {
+	font-size: 26px;
+}
+
+h2 {
+	font-size: 22px;
+}
+
+h3 {
+	font-size: 18px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+#header {
+	
+}
+
+button,.button,input[type=submit] {
+	font-size: 16px;
+	padding: 5px 10px;
+	background: rgba(239, 239, 235, 1);
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, .3);
+	text-decoration: none;
+	color: black;
+	display: inline-block;
+	min-width: 50px;
+	background: -moz-linear-gradient(bottom, #AAAAAA, #EEEEEE);
+	background: -webkit-gradient(linear, center bottom, center top, from(#AAAAAA),
+		to(#EEEEEE) );
+	text-align: center;
+	cursor: pointer;
+	overflow: visible;
+}
+
+button:hover,.button:hover,input[type=submit]:hover{
+	background: rgba(0, 0, 0, .1);
+	background: -moz-linear-gradient(bottom, #AAAAAA, #CCCCCC);
+	background: -webkit-gradient(linear, center bottom, center top, from(#AAAAAA),
+		to(#CCCCCC) );
+}
+
+.container {
+	width: 960px;
+	background: #FFFFFF;
+	margin: 0px auto;
+	overflow: hidden;
+}
+
+/** FOOTER **/
+#footer {
+	
+}
+
+#footer-links {
+	float: left;
+}
+
+#footer-links a {
+	float: left;
+	display: block;
+	padding: 5px;
+	margin-right: 5px;
+	background: gray;
+}
+
+#footer-links a:hover {
+	background: pink;
+}
+
+#copyright {
+	float: right;
+}
