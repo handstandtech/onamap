@@ -1,0 +1,360 @@
+!SESSION 2012-04-02 13:03:20.757 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_29
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/handstandtech/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/handstandtech/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2012-04-02 13:03:35.712
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.android.ide.eclipse.ddms 4 0 2012-04-02 13:03:50.213
+!MESSAGE DDMS files not found: /Users/handstandtech/dev/eclipse/Eclipse.app/Contents/MacOS/platform-tools/adb /Users/handstandtech/dev/eclipse/Eclipse.app/Contents/MacOS/tools/hprof-conv /Users/handstandtech/dev/eclipse/Eclipse.app/Contents/MacOS/tools/traceview 
+
+!ENTRY com.google.gdt.eclipse.core 4 0 2012-04-02 13:04:08.623
+!MESSAGE Error while tracking project-level changes from a change in R/
+!STACK 1
+Java Model Exception: Java Model Status [Unbound classpath container: 'App Engine SDK [missing]' in project 'server']
+	at org.eclipse.jdt.internal.core.JavaProject.getResolvedClasspath(JavaProject.java:1990)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.isResourceInAnOutputPath(ProjectChangeTimestampTracker.java:121)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:162)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:169)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.resourceChanged(ProjectChangeTimestampTracker.java:181)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:395)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1530)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2353)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:118)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+!SUBENTRY 1 org.eclipse.jdt.core 4 963 2012-04-02 13:04:08.624
+!MESSAGE Unbound classpath container: 'App Engine SDK [missing]' in project 'server'
+
+!ENTRY com.google.gdt.eclipse.core 4 0 2012-04-02 13:04:08.840
+!MESSAGE Error while tracking project-level changes from a change in R/
+!STACK 1
+Java Model Exception: Java Model Status [Unbound classpath container: 'App Engine SDK [missing]' in project 'server']
+	at org.eclipse.jdt.internal.core.JavaProject.getResolvedClasspath(JavaProject.java:1990)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.isResourceInAnOutputPath(ProjectChangeTimestampTracker.java:121)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:162)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:169)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.resourceChanged(ProjectChangeTimestampTracker.java:181)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:395)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1530)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:45)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.jdt.core 4 963 2012-04-02 13:04:08.840
+!MESSAGE Unbound classpath container: 'App Engine SDK [missing]' in project 'server'
+
+!ENTRY com.google.gdt.eclipse.core 4 0 2012-04-02 13:04:09.670
+!MESSAGE Error while tracking project-level changes from a change in R/
+!STACK 1
+Java Model Exception: Java Model Status [Unbound classpath container: 'App Engine SDK [missing]' in project 'server']
+	at org.eclipse.jdt.internal.core.JavaProject.getResolvedClasspath(JavaProject.java:1990)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.isResourceInAnOutputPath(ProjectChangeTimestampTracker.java:121)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:162)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:169)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.resourceChanged(ProjectChangeTimestampTracker.java:181)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:395)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1530)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:156)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.jdt.core 4 963 2012-04-02 13:04:09.671
+!MESSAGE Unbound classpath container: 'App Engine SDK [missing]' in project 'server'
+
+!ENTRY com.google.gdt.eclipse.core 4 0 2012-04-02 13:04:12.001
+!MESSAGE Error while tracking project-level changes from a change in R/
+!STACK 1
+Java Model Exception: Java Model Status [Unbound classpath container: 'App Engine SDK [missing]' in project 'server']
+	at org.eclipse.jdt.internal.core.JavaProject.getResolvedClasspath(JavaProject.java:1990)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.isResourceInAnOutputPath(ProjectChangeTimestampTracker.java:121)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:162)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.visitDelta(ProjectChangeTimestampTracker.java:169)
+	at com.google.gdt.eclipse.core.projects.ProjectChangeTimestampTracker.resourceChanged(ProjectChangeTimestampTracker.java:181)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:395)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1530)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2353)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2326)
+	at org.eclipse.wst.jsdt.core.JavaScriptCore.initializeAfterLoad(JavaScriptCore.java:2756)
+	at org.eclipse.wst.jsdt.internal.ui.InitializeAfterLoadJob$RealJob.run(InitializeAfterLoadJob.java:32)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.jdt.core 4 963 2012-04-02 13:04:12.002
+!MESSAGE Unbound classpath container: 'App Engine SDK [missing]' in project 'server'
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2012-04-02 13:04:21.908
+!MESSAGE Registering: com.google.appengine.eclipse.sdkbundle_1.6.4.v201203300216r37
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2012-04-02 13:04:26.089
+!MESSAGE Registering: com.google.gwt.eclipse.sdkbundle_2.4.0.v201203300216-rel-r37
+
+!ENTRY com.google.gdt.eclipse.core 1 0 2012-04-02 13:04:26.523
+!MESSAGE Scheduled rebuild of project server because of plugin update (current version: 2.5.2.v201203300216-rel-r37)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:29.859
+!MESSAGE Unexpected error while validating FlickrServerConstants.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:29.859
+!MESSAGE Unexpected error while validating FlickrHelper.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:29.990
+!MESSAGE Unexpected error while validating FlickrAPIOAuth.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:30.131
+!MESSAGE Unexpected error while validating FlickrPhotoDAOImpl.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:30.248
+!MESSAGE Unexpected error while validating ProcessPhotosetActionController.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jdt.core 4 977 2012-04-02 13:04:31.300
+!MESSAGE Build path contains duplicate entry: 'com.google.appengine.eclipse.core.GAE_CONTAINER' for project 'server'
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:32.664
+!MESSAGE Unexpected error while validating FlickrServerConstants.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.google.gdt.eclipse.core.BuilderUtilities$2.runInWorkspace(BuilderUtilities.java:202)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:32.665
+!MESSAGE Unexpected error while validating FlickrHelper.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.google.gdt.eclipse.core.BuilderUtilities$2.runInWorkspace(BuilderUtilities.java:202)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:32.722
+!MESSAGE Unexpected error while validating FlickrAPIOAuth.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.google.gdt.eclipse.core.BuilderUtilities$2.runInWorkspace(BuilderUtilities.java:202)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:32.723
+!MESSAGE Unexpected error while validating FlickrPhotoDAOImpl.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.google.gdt.eclipse.core.BuilderUtilities$2.runInWorkspace(BuilderUtilities.java:202)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY com.google.gdt.eclipse.appengine.rpc 4 0 2012-04-02 13:04:32.724
+!MESSAGE Unexpected error while validating ProcessPhotosetActionController.java
+!STACK 0
+java.lang.NullPointerException
+	at com.google.gdt.eclipse.appengine.rpc.validators.JavaCompilationParticipant.buildStarting(JavaCompilationParticipant.java:83)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.notifyParticipants(AbstractImageBuilder.java:565)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:287)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.google.gdt.eclipse.core.BuilderUtilities$2.runInWorkspace(BuilderUtilities.java:202)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)

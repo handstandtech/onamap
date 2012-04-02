@@ -12,7 +12,7 @@
 	</system-properties>
 	
 	<static-files>
-        <include path="/assets/**" />
+        <include path="/assets/*" />
     </static-files>
 
 	<sessions-enabled>true</sessions-enabled>
