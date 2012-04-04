@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>flickr</artifactId>
+	<groupId>com.handstandtech</groupId>
+	<packaging>jar</packaging>
+	<version>0.9</version>
+	<name>Handstand Tech - Flickr</name>
+	<properties>
+		<!-- Project properties -->
+		<target.jdk>1.6</target.jdk>
+		<project.encoding>UTF-8</project.encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<webapp.directory>${project.build.directory}/${project.build.finalName}</webapp.directory>
+
+		<!-- Dependencies versions -->
+		<gae.version>1.5.1</gae.version>
+		<oauth-signpost.version>1.2.1.1</oauth-signpost.version>
+		<servlet-api.version>2.5</servlet-api.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<maven-source-plugin.version>2.1.2</maven-source-plugin.version>
+		<maven-gae-plugin.version>0.8.4</maven-gae-plugin.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.handstandtech</groupId>
+			<artifactId>restclient-shared</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<!-- OAuth from Signpost -->
+		<dependency>
+			<groupId>oauth.signpost</groupId>
+			<artifactId>oauth-signpost</artifactId>
+		</dependency>
+	</dependencies>
+</project>

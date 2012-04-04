@@ -1,0 +1,5 @@
+INDEX VERSION 1.126
+/Users/handstandtech/dev/git/onamap/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/390342099.index
+/server/src
+/Users/handstandtech/dev/git/onamap/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/170202386.index
+/onamap-server/src

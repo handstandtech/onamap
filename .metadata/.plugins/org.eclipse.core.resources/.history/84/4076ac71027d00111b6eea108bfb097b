@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>restclient-server</artifactId>
+	<packaging>jar</packaging>
+	<name>Handstand Tech - REST Client - Server</name>
+	<parent>
+		<groupId>com.handstandtech</groupId>
+		<artifactId>handstandtech-restclient</artifactId>
+		<version>0.9.1</version>
+		<relativePath>../</relativePath>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.handstandtech</groupId>
+			<artifactId>restclient-shared</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<!-- OAuth from Signpost -->
+		<dependency>
+			<groupId>oauth.signpost</groupId>
+			<artifactId>oauth-signpost</artifactId>
+		</dependency>
+
+		<!-- AppEngine dependencies -->
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+		</dependency>
+	</dependencies>
+</project>

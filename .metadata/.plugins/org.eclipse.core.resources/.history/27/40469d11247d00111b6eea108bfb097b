@@ -1,0 +1,9 @@
+package com.handstandtech.flickr.server;
+
+import oauth.signpost.OAuthConsumer;
+
+import com.handstandtech.restclient.server.auth.oauth.OAuthAuthenticator;
+
+public interface OAuthAuthenticatorProvider {
+	public OAuthAuthenticator getAuthenticator(OAuthConsumer consumer);
+}

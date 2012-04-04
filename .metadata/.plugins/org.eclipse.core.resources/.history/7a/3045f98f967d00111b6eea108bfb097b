@@ -1,0 +1,127 @@
+package com.handstandtech.flickr.server;
+
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.basic.DefaultOAuthProvider;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.handstandtech.flickr.shared.model.FlickrPerson;
+import com.handstandtech.flickr.shared.model.FlickrPhotoset;
+import com.handstandtech.flickr.shared.model.FlickrPhotosetInfos;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+import com.handstandtech.flickr.shared.model.places.FlickrPlace;
+import com.handstandtech.restclient.server.RESTClient;
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.server.model.RESTRequest;
+import com.handstandtech.restclient.shared.model.RESTResult;
+
+public class FlickrHelper {
+
+	private static final Logger log = LoggerFactory
+			.getLogger(FlickrHelper.class);
+	private static String API_KEY;
+
+	protected OAuthConsumer consumer;
+	private RESTClientProvider restProvider;
+	private OAuthAuthenticatorProvider oAuthProvider;
+
+	public FlickrHelper(OAuthConsumer consumer,
+			RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		this.consumer = consumer;
+		API_KEY = consumer.getConsumerKey();
+		this.restProvider = restProvider;
+		this.oAuthProvider = oAuthProvider;
+	}
+
+	public FlickrHelper(OAuthConsumer consumer, String token,
+			String tokenSecret, RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		this.consumer = consumer;
+		API_KEY = consumer.getConsumerKey();
+		this.consumer.setTokenWithSecret(token, tokenSecret);
+		this.restProvider = restProvider;
+		this.oAuthProvider = oAuthProvider;
+	}
+
+	private Authenticator getAuthenticator() {
+		Authenticator a = null;
+		if (consumer != null) {
+			a = oAuthProvider.getAuthenticator(consumer);
+		}
+		return a;
+	}
+
+	public FlickrUser people_searchByEmail(String email) {
+		RESTRequest restRequest = FlickrURLBuilder.people_searchByEmail(email,
+				getAuthenticator(), API_KEY);
+		RESTClient client = createRESTClientInstance();
+		RESTResult restResult = client.request(restRequest);
+		log.info(restResult.toString());
+		return FlickrUtils.getSearchByEmailResult(restResult);
+	}
+
+	private RESTClient createRESTClientInstance() {
+		return restProvider.getNewClientInstance();
+	}
+
+	public FlickrPhotosetInfos photosets_getList(String user_id) {
+		RESTRequest restRequest = FlickrURLBuilder.photosets_getList(user_id,
+				getAuthenticator(), API_KEY);
+		RESTClient client = createRESTClientInstance();
+		RESTResult restResult = client.request(restRequest);
+		log.info(restResult.toString());
+		return FlickrUtils.getPhotosetInfosFromResult(restResult);
+	}
+
+	public FlickrPlace places_getInfo(String place_id) {
+		RESTRequest restRequest = FlickrURLBuilder.places_getInfo(place_id,
+				getAuthenticator(), API_KEY);
+		RESTClient client = createRESTClientInstance();
+		RESTResult restResult = client.request(restRequest);
+		log.info(restResult.toString());
+		return FlickrUtils.getPlacesInfoFromResult(restResult);
+	}
+
+	public FlickrPhotoset photosets_getPhotos(String photoset_id) {
+		RESTRequest restRequest = FlickrURLBuilder.photosets_getPhotos(
+				photoset_id, getAuthenticator(), API_KEY);
+		RESTClient client = createRESTClientInstance();
+		RESTResult restResult = client.request(restRequest);
+		log.info(restResult.toString());
+		return FlickrUtils.getPhotosetFromResult(restResult);
+	}
+
+	public FlickrPerson people_getInfo(String id) {
+		RESTRequest restRequest = FlickrURLBuilder.people_getInfo(id,
+				getAuthenticator(), API_KEY);
+		RESTClient client = createRESTClientInstance();
+		RESTResult restResult = client.request(restRequest);
+		log.info(restResult.toString());
+		return FlickrUtils.getPersonFromResult(restResult);
+	}
+
+	public FlickrUser test_login() {
+		RESTRequest restRequest = FlickrURLBuilder.test_login(
+				getAuthenticator(), API_KEY);
+		RESTClient client = createRESTClientInstance();
+		RESTResult restResult = client.request(restRequest);
+		log.info(restResult.toString());
+		return FlickrUtils.getFlickrUserFromResult(restResult);
+	}
+
+	public static OAuthProvider getFlickrOAuthProvider() {
+		String baseUrl = "http://www.flickr.com/services/oauth/";
+		OAuthProvider provider = new DefaultOAuthProvider(baseUrl
+				+ "request_token", baseUrl + "access_token", baseUrl
+				+ "authorize");
+		return provider;
+	}
+
+	public void setTokenAndSecret(String token, String tokenSecret) {
+		consumer.setTokenWithSecret(token, tokenSecret);
+	}
+
+}

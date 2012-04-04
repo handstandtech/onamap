@@ -1,0 +1,20 @@
+package com.handstandtech.flickr.tests;
+import static org.junit.Assert.assertNotNull;
+import oauth.signpost.OAuthConsumer;
+
+import org.junit.Test;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+
+public class FlickrTestCase {
+
+	@Test
+	public void test() {
+		FlickrHelper flickr = FlickrConstants.createFlickrHelper();
+		flickr.setTokenKeyAndSecret("72157629620912897-909707b0f728d0ef","9754f52f99728b82");
+		FlickrUser flickrUser = flickr.getCurrentUserInfo();
+		assertNotNull(flickrUser);
+	}
+
+}

@@ -1,10 +1,15 @@
-#Mon Apr 02 13:04:09 CDT 2012
+#Tue Apr 03 12:18:26 CDT 2012
 useQuickDiffPrefPage=true
+org.eclipse.wst.jsdt.ui.text.code_templates_migrated=true
 tabWidthPropagated=true
+proposalOrderMigrated=true
+org.eclipse.wst.jsdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 useAnnotationsPrefPage=true
 org.eclipse.jface.textfont=1|Monaco|11.0|0|COCOA|1|;
 org.eclipse.wst.jsdt.ui.javadoclocations.migrated=true
 eclipse.preferences.version=1
-fontPropagated=true
+internal.default.compliance=default
 org.eclipse.wst.jsdt.ui.editor.tab.width=
+fontPropagated=true
+org.eclipse.wst.jsdt.internal.ui.navigator.layout=1
 org.eclipse.wst.jsdt.ui.formatterprofiles.version=11

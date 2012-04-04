@@ -1,0 +1,36 @@
+package net.onamap.android;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class RESTURLUtil {
+	public static String createParamString(Map<String, String> params) {
+		StringBuilder sb = new StringBuilder();
+		if (params != null) {
+			List<String> keys = new ArrayList<String>(params.keySet());
+			for (int i = 0; i < keys.size(); i++) {
+				String key = keys.get(i);
+				if (i > 0) {
+					sb.append("&");
+				}
+				String value = params.get(key);
+				String keyValuePair = key + "=" + value;
+				sb.append(keyValuePair);
+			}
+		}
+		return sb.toString();
+	}
+
+	public static String createFullUrl(String baseUrl,
+			Map<String, String> params) {
+		String fullUrl = baseUrl;
+		if (params != null) {
+			String paramsString = createParamString(params);
+			if (paramsString.length() > 0) {
+				fullUrl = baseUrl + "?" + paramsString;
+			}
+		}
+		return fullUrl;
+	}
+}

@@ -1,0 +1,31 @@
+/**
+ * Handstand Technologies, LLC
+ * http://handstandtech.com
+ */
+package com.handstandtech.restclient.server.model;
+
+import java.io.Serializable;
+import java.util.Map;
+
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.shared.model.RequestMethod;
+
+public class RESTRequest implements Serializable {
+
+	/**
+	 * Default Serialization UID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String url;
+	
+	private RequestMethod method;
+	
+	private Authenticator auth;
+	
+	private byte[] payload;
+	
+	private Map<String, String> headers;
+
+
+}

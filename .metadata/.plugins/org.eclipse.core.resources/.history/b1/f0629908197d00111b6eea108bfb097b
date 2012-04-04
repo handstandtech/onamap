@@ -1,0 +1,18 @@
+package net.onamap.server;
+
+import net.onamap.server.constants.FlickrConstants;
+import oauth.signpost.OAuthConsumer;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+
+public class Main {
+	public static void main(String arsg[]) {
+		System.out.println("Hey!");
+		OAuthConsumer consumer = FlickrConstants.getOAuthConsumer();
+		consumer.setTokenWithSecret("72157629620912897-909707b0f728d0ef",
+				"9754f52f99728b82");
+		FlickrHelper flickr = new FlickrHelper(consumer);
+		FlickrUser flickrUser = flickr.getCurrentUserInfo();
+	}
+}

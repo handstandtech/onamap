@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="243" key="DIALOG_WIDTH"/>
+		<item value="132" key="DIALOG_Y_ORIGIN"/>
+		<item value="379" key="DIALOG_HEIGHT"/>
+		<item value="391" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="" key="selection"/>
+		<list key="findhistory">
+			<item value="encode"/>
+			<item value="authen"/>
+			<item value="perm"/>
+			<item value="entity"/>
+			<item value="login"/>
+			<item value="FlickrHelper.API_KEY"/>
+			<item value="BASE_URL"/>
+			<item value="getAuthenticator()"/>
+		</list>
+		<list key="replacehistory">
+			<item value="apiKey"/>
+			<item value="FlickrHelper.getAuthenticator()"/>
+			<item value="FlickrHelper.API_KEY"/>
+			<item value="API_KEY"/>
+			<item value=""/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="371" key="DIALOG_Y_ORIGIN"/>
+		<item value="604" key="DIALOG_X_ORIGIN"/>
+	</section>
+</section>

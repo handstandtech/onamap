@@ -1,13 +1,22 @@
-#Mon Apr 02 13:03:37 CDT 2012
-useQuickDiffPrefPage=true
-tabWidthPropagated=true
-content_assist_proposals_background=255,255,255
-org.eclipse.jdt.ui.javadoclocations.migrated=true
-useAnnotationsPrefPage=true
-org.eclipse.jface.textfont=1|Monaco|11.0|0|COCOA|1|;
-org.eclipse.jdt.ui.editor.tab.width=
-org.eclipse.jdt.ui.formatterprofiles.version=12
-spelling_locale_initialized=true
-eclipse.preferences.version=1
+#Tue Apr 03 12:18:26 CDT 2012
 content_assist_proposals_foreground=0,0,0
+spelling_locale_initialized=true
+content_assist_disabled_computers=org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000
+org.eclipse.jdt.ui.text.templates_migrated=true
+useAnnotationsPrefPage=true
+eclipse.preferences.version=1
+org.eclipse.jface.textfont=1|Monaco|11.0|0|COCOA|1|;
+tabWidthPropagated=true
+org.eclipse.jdt.ui.editor.tab.width=
 fontPropagated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.javadoclocations.migrated=true
+proposalOrderMigrated=true
+content_assist_proposals_background=255,255,255
+org.eclipse.jdt.ui.formatterprofiles.version=12
+org.eclipse.jdt.internal.ui.navigator.layout=2
+content_assist_number_of_computers=23
+useQuickDiffPrefPage=true
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="oauth.signpost.OAuthConsumer"><rhs name\="oauth.signpost.basic.DefaultOAuthConsumer"/></lhs><lhs name\="com.handstandtech.flickr.server.FlickrHelper"><rhs name\="com.handstandtech.flickr.server.FlickrHelper"/></lhs><lhs name\="com.handstandtech.restclient.server.RESTClient"><rhs name\="com.handstandtech.restclient.server.impl.RESTClientJavaNetImpl"/><rhs name\="com.handstandtech.restclient.server.RESTClientCommonsImpl"/><rhs name\="com.handstandtech.restclient.server.impl.RESTClientCommonsImpl"/></lhs><lhs name\="com.handstandtech.restclient.server.impl.RESTClientBaseImpl"><rhs name\="com.handstandtech.restclient.server.RESTClientCommonsImpl"/><rhs name\="com.handstandtech.restclient.server.impl.RESTClientCommonsImpl"/></lhs><lhs name\="com.handstandtech.restclient.server.RESTClientCommonsImpl"><rhs name\="com.handstandtech.restclient.server.RESTClientCommonsImpl"/></lhs><lhs name\="java.lang.Enum"><rhs name\="com.handstandtech.restclient.shared.model.RequestMethod"/></lhs><lhs name\="com.handstandtech.restclient.server.model.RESTRequest"><rhs name\="com.handstandtech.restclient.server.model.RESTRequest"/></lhs><lhs name\="com.handstandtech.restclient.server.impl.RESTClientCommonsImpl"><rhs name\="com.handstandtech.restclient.server.impl.RESTClientCommonsImpl"/></lhs><lhs name\="oauth.signpost.AbstractOAuthProvider"><rhs name\="oauth.signpost.commonshttp.CommonsHttpOAuthProvider"/></lhs><lhs name\="oauth.signpost.OAuthProvider"><rhs name\="oauth.signpost.commonshttp.CommonsHttpOAuthProvider"/></lhs><lhs name\="oauth.signpost.commonshttp.CommonsHttpOAuthProvider"><rhs name\="oauth.signpost.commonshttp.CommonsHttpOAuthProvider"/></lhs><lhs name\="org.apache.http.entity.mime.content.ContentDescriptor"><rhs name\="org.apache.http.entity.mime.content.StringBody"/></lhs><lhs name\="org.apache.http.entity.mime.content.ContentBody"><rhs name\="org.apache.http.entity.mime.content.StringBody"/></lhs></history>
+org.eclipse.jdt.ui.text.code_templates_migrated=true

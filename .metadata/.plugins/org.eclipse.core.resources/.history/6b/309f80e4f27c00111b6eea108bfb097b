@@ -1,0 +1,9 @@
+package net.onamap.android;
+
+import java.net.HttpURLConnection;
+
+public interface Authenticator {
+	public void authenticate(HttpURLConnection connection);
+
+	public RequestAuthentication getRequestAuthenticationType();
+}

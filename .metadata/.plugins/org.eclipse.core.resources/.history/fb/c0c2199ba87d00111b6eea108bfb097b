@@ -1,0 +1,68 @@
+package com.handstandtech.flickr.server;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import oauth.signpost.OAuthConsumer;
+
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.server.model.RESTRequest;
+import com.handstandtech.restclient.shared.model.RequestMethod;
+import com.handstandtech.restclient.shared.util.RESTURLUtil;
+
+public class FlickrUploader extends FlickrHelper {
+	private static String UPLOAD_API_ENDPOINT = "http://api.flickr.com/services/upload/";
+
+	public FlickrUploader(OAuthConsumer consumer,
+			RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, restProvider, oAuthProvider);
+	}
+
+	public FlickrUploader(OAuthConsumer consumer, String token,
+			String tokenSecret, RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, token, tokenSecret, restProvider, oAuthProvider);
+	}
+
+	public static RESTRequest upload(String title, String description,
+			List<String> tags, Boolean is_public, Boolean is_friend,
+			Boolean is_family, FlickrSafetyLevel safety_level,
+			FlickrContentType content_type, Boolean hidden, Authenticator auth) {
+		Map<String, String> params = new HashMap<String, String>();
+
+		if (title != null && title.length() > 0) {
+			params.put("title", title);
+		}
+		if (description != null && description.length() > 0) {
+			params.put("description", description);
+		}
+		if (content_type != null) {
+			params.put("content_type", content_type.getValue() + "");
+		}
+		if (hidden != null) {
+			String value = null;
+			if (hidden.booleanValue()) {
+				value = "2";
+			} else {
+				value = "1";
+			}
+
+			params.put("hidden", value);
+		}
+		if (safety_level != null) {
+			params.put("safety_level", safety_level.getValue() + "");
+		}
+		params.put("format", "json");
+		params.put("nojsoncallback", "1");
+		params.put("apiKey", API_KEY);
+
+		String url = RESTURLUtil.createFullUrl(UPLOAD_API_ENDPOINT, params);
+
+		RESTRequest restRequest = new RESTRequest(RequestMethod.POST, url, auth);
+		return restRequest;
+
+	}
+}

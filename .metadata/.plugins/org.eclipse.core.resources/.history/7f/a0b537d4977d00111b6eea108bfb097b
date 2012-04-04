@@ -1,0 +1,26 @@
+package com.handstandtech.flickr.server;
+
+import java.io.File;
+import java.util.List;
+
+import oauth.signpost.OAuthConsumer;
+
+import com.handstandtech.restclient.server.model.RESTRequest;
+import com.handstandtech.restclient.shared.util.RESTURLUtil;
+
+public class FlickrUploader extends FlickrHelper {
+	private static String UPLOAD_API_ENDPOINT="http://api.flickr.com/services/upload/";
+	
+	public FlickrUploader(OAuthConsumer consumer,
+			RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, restProvider, oAuthProvider);
+	}
+
+	public FlickrUploader(OAuthConsumer consumer, String token,
+			String tokenSecret, RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, token, tokenSecret, restProvider, oAuthProvider);
+	}
+	
+}

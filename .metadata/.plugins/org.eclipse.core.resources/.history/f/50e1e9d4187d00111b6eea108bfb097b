@@ -1,0 +1,33 @@
+package net.onamap.server.constants;
+
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.restclient.server.RESTClient;
+
+public class FlickrConstants {
+	// "Testing Java"
+	private static final String API_KEY = "d32f7335f0a3dd8c63f4f3fc312a37bc";
+	private static final String API_SECRET = "f6d7142634e935d1";
+
+	private static RESTClientProvider restClientProvider = new RESTClientProvider() {
+
+		@Override
+		public RESTClient getNewClientInstance() {
+			return new RESTClientCommonsImpl();
+		}
+	};
+	
+	public static FlickrHelper createFlickrHelper() {
+		return new FlickrHelper(API_KEY, API_SECRET);
+	}
+	
+	public static FlickrHelper createFlickrHelper(String token, String tokenSecret) {
+		return new FlickrHelper(API_KEY, API_SECRET);
+	}
+
+	public static OAuthConsumer getOAuthConsumer() {
+		return new DefaultOAuthConsumer(API_KEY, API_SECRET);
+	}
+}

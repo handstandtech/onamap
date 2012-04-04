@@ -1,0 +1,10 @@
+import oauth.signpost.OAuthConsumer;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+
+public class MainOne {
+	public static void main(String[] args) {
+		
+	}
+}

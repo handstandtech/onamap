@@ -1,0 +1,41 @@
+package com.handstandtech.flickr.server;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.server.model.RESTRequest;
+import com.handstandtech.restclient.shared.model.RequestMethod;
+import com.handstandtech.restclient.shared.util.RESTURLUtil;
+
+import oauth.signpost.OAuthConsumer;
+
+public class CommonsFlickrUploader extends FlickrHelper {
+	public CommonsFlickrUploader(OAuthConsumer consumer,
+			RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, restProvider, oAuthProvider);
+	}
+
+	public CommonsFlickrUploader(OAuthConsumer consumer, String token,
+			String tokenSecret, RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, token, tokenSecret, restProvider, oAuthProvider);
+	}
+	
+	public static RESTRequest people_searchByEmail(String email,
+			Authenticator auth, String apiKey) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("method", "flickr.people.findByEmail");
+		params.put("find_email", email);
+		params.put("format", "json");
+		params.put("nojsoncallback", "1");
+		params.put("apiKey", apiKey);
+
+		String url = RESTURLUtil.createFullUrl(BASE_URL, params);
+
+		return new RESTRequest(RequestMethod.GET, url, auth);
+
+	}
+
+}

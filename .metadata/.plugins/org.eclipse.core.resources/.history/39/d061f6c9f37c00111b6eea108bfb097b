@@ -1,0 +1,114 @@
+package net.onamap.android;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthProvider;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.handstandtech.restclient.server.RESTClient;
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.server.auth.OAuthAuthenticator;
+import com.handstandtech.restclient.server.impl.RESTClientJavaNetImpl;
+import com.handstandtech.restclient.shared.model.RESTResult;
+import com.handstandtech.restclient.shared.model.RequestMethod;
+import com.handstandtech.restclient.shared.util.RESTURLUtil;
+
+public class FlickrHelper {
+
+	public static void main(String args[]) {
+
+	}
+
+	private static final Logger log = LoggerFactory
+			.getLogger(FlickrHelper.class);
+	private static final String BASE_URL = "http://api.flickr.com/services/rest/";
+
+	// "Testing Java"
+	private static final String API_KEY = "d32f7335f0a3dd8c63f4f3fc312a37bc";
+	private static final String API_SECRET = "f6d7142634e935d1";
+
+	protected OAuthConsumer consumer;
+
+	public FlickrHelper() {
+
+	}
+
+	public FlickrHelper(OAuthConsumer consumer) {
+		this.consumer = consumer;
+	}
+
+	public FlickrHelper(String requestUrl, String token, String tokenSecret) {
+		this.consumer = getOAuthConsumer();
+		this.consumer.setTokenWithSecret(token, tokenSecret);
+	}
+
+	public FlickrHelper(String consumerKey, String consumerSecret,
+			String token, String tokenSecret) {
+		this.consumer = new DefaultOAuthConsumer(consumerKey, consumerSecret);
+		this.consumer.setTokenWithSecret(token, tokenSecret);
+	}
+
+	private Authenticator getAuthenticator() {
+		if (consumer != null) {
+			return new OAuthAuthenticator(consumer);
+		} else {
+			return null;
+		}
+	}
+
+	public FlickrPhotosetInfos photosets_getList(String user_id) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("method", "flickr.photosets.getList");
+		if (user_id != null) {
+			params.put("user_id", user_id);
+		}
+		params.put("format", "json");
+		params.put("nojsoncallback", "1");
+		params.put("api_key", API_KEY);
+
+		String url = RESTURLUtil.createFullUrl(BASE_URL, params);
+
+		RESTClient client = new RESTClientJavaNetImpl();
+		RESTResult restResult = client.request(RequestMethod.GET, url,
+				getAuthenticator());
+		
+		log.info(restResult.toString());
+
+		return FlickrUtils.getPhotosetInfosFromResult(restResult);
+	}
+
+
+	private static OAuthConsumerInfoManager oauthManager = new OAuthConsumerInfoManager();
+	static {
+		oauthManager.addConsumerInfoSet(getLocalhostConsumerInfo());
+	}
+
+	private static OAuthConsumerInfoSet getLocalhostConsumerInfo() {
+		OAuthConsumerInfoSet localhost = new OAuthConsumerInfoSet();
+		localhost.setName("Flickr - 127.0.0.1:8888");
+		localhost.setCallbackUri(Urls.FLICKR_OAUTH_CALLBACK_URI);
+		localhost.setConsumerKey(API_KEY);
+		localhost.setConsumerSecret(API_SECRET);
+		localhost.setUrlPrefix("localhost");
+		return localhost;
+	}
+
+	public static OAuthProvider getFlickrOAuthProvider() {
+		String baseUrl = "http://www.flickr.com/services/oauth/";
+		OAuthProvider provider = new DefaultOAuthProvider(baseUrl
+				+ "request_token", baseUrl + "access_token", baseUrl
+				+ "authorize");
+		return provider;
+	}
+
+	public static OAuthConsumer getOAuthConsumer() {
+		return new DefaultOAuthConsumer(API_KEY, API_SECRET);
+	}
+
+}

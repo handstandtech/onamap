@@ -1,0 +1,5 @@
+package com.handstandtech.restclient.server.auth;
+
+public class CommonsRESTRequest {
+
+}

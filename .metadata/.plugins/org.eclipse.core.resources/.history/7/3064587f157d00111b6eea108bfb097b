@@ -1,0 +1,123 @@
+/**
+ * Copyright (C) 2010 Handstand Technologies, LLC
+ * http://handstandtech.com
+ */
+package net.onamap.android;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.handstandtech.restclient.server.impl.RESTClientBaseImpl;
+import com.handstandtech.restclient.shared.model.RESTResult;
+import com.handstandtech.restclient.shared.model.RequestAuthentication;
+import com.handstandtech.restclient.shared.model.RequestMethod;
+
+public class RESTClientCommonsImpl {
+
+	public RESTClientCommonsImpl() {
+		super();
+	}
+
+	public RESTResult internalDoRequest(RequestMethod method, String urlString,
+			OAuthCommonsAuthenticator auth, byte[] payload,
+			Map<String, String> requestHeaders) throws IOException {
+		// Information about the Result of the Call
+		RESTResult result = new RESTResult();
+		result.setRequestUrl(urlString);
+
+		// create a consumer object and configure it with the access
+		// token and token secret obtained from the service provider
+
+		// create an HTTP request to a protected resource
+		HttpRequestBase request = null;
+
+		switch (method) {
+		case GET:
+			request = new HttpGet(urlString);
+			break;
+		case POST:
+			request = new HttpPost(urlString);
+			break;
+		}
+
+		// send the request
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpResponse response = httpClient.execute(request);
+
+		response.getEntity().getContent();
+		// ---------
+
+		// // sigh. openConnection() doesn't actually open the connection,
+		// // just gives you a URLConnection. connect() will open the
+		// connection.
+		// result.setRequestMethod(method);
+		// HttpURLConnection connection = (HttpURLConnection)
+		// url.openConnection();
+		// connection.setConnectTimeout(10000); // Ten Seconds
+		// connection.setReadTimeout(15000); // 15 Seconds
+		// connection.setRequestMethod(method.name());
+
+		// if (requestHeaders != null) {
+		// for (String key : requestHeaders.keySet()) {
+		// String value = requestHeaders.get(key);
+		// connection.setRequestProperty(key, value);
+		// }
+		// }
+		// Authenticate if required
+		if (auth != null) {
+			auth.authenticate(request);
+			result.setRequestAuthentication(auth.getRequestAuthenticationType());
+		} else {
+			result.setRequestAuthentication(RequestAuthentication.NONE);
+		}
+
+		// // write body if we're doing POST or PUT
+		// if (payload != null) {
+		// byte buffer[] = new byte[8192];
+		// int read = 0;
+		// InputStream is = new ByteArrayInputStream(payload);
+		// if (is != null) {
+		// connection.setDoOutput(true);
+		// OutputStream output = connection.getOutputStream();
+		// while ((read = is.read(buffer)) != -1) {
+		// output.write(buffer, 0, read);
+		// }
+		// }
+		// }
+
+		// do request
+		long time = System.currentTimeMillis();
+
+		StringBuffer responseBody = new StringBuffer();
+		try {
+			InputStreamReader inputStreamReader = new InputStreamReader(
+					response.getEntity().getContent(), "UTF-8");
+			BufferedReader reader = new BufferedReader(inputStreamReader);
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				responseBody.append(line + "\n");
+			}
+		} catch (IOException e) {
+			// Let it Continue
+		} finally {
+		}
+		time = System.currentTimeMillis() - time;
+
+		result.setResponseLength(responseBody.length());
+		result.setResponseTime(time);
+
+		// dump body
+		result.setResponseBody(responseBody.toString());
+		return result;
+	}
+}

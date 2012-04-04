@@ -1,0 +1,25 @@
+package net.onamap.server.constants;
+
+import com.handstandtech.restclient.server.auth.oauth.OAuthConsumerInfoManager;
+import com.handstandtech.restclient.server.auth.oauth.OAuthConsumerInfoManager.OAuthConsumerInfoSet;
+
+public class FlickrConstants {
+	// "Testing Java"
+	private static final String API_KEY = "d32f7335f0a3dd8c63f4f3fc312a37bc";
+	private static final String API_SECRET = "f6d7142634e935d1";
+
+	private static OAuthConsumerInfoManager oauthManager = new OAuthConsumerInfoManager();
+	static {
+		oauthManager.addConsumerInfoSet(getLocalhostConsumerInfo());
+	}
+
+	private static OAuthConsumerInfoSet getLocalhostConsumerInfo() {
+		OAuthConsumerInfoSet localhost = new OAuthConsumerInfoSet();
+		localhost.setName("Flickr - 127.0.0.1:8888");
+		localhost.setCallbackUri(Urls.FLICKR_OAUTH_CALLBACK_URI);
+		localhost.setConsumerKey(API_KEY);
+		localhost.setConsumerSecret(API_SECRET);
+		localhost.setUrlPrefix("localhost");
+		return localhost;
+	}
+}

@@ -1,0 +1,45 @@
+package com.handstandtech.flickr.server;
+
+import java.io.File;
+import java.util.List;
+
+import oauth.signpost.OAuthConsumer;
+
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.server.model.RESTRequest;
+
+public class FlickrUploader extends FlickrHelper {
+	private static String UPLOAD_API_ENDPOINT = "http://api.flickr.com/services/upload/";
+
+	public FlickrUploader(OAuthConsumer consumer,
+			RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, restProvider, oAuthProvider);
+	}
+
+	public FlickrUploader(OAuthConsumer consumer, String token,
+			String tokenSecret, RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, token, tokenSecret, restProvider, oAuthProvider);
+	}
+
+	public static RESTRequest people_searchByEmail(File photo, String title,
+			String description, List<String> tags, String safety_level,
+			String content_type, String hidden, Authenticator auth,
+			String apiKey) {
+		// Map<String, String> params = new HashMap<String, String>();
+		// params.put("method", "flickr.people.findByEmail");
+		// params.put("find_email", email);
+		// params.put("format", "json");
+		// params.put("nojsoncallback", "1");
+		// params.put("apiKey", apiKey);
+		//
+		// String url = RESTURLUtil.createFullUrl(UPLOAD_API_ENDPOINT, params);
+		//
+		// String url = RESTURLUtil.createFullUrl(BASE_URL, params);
+		//
+		// return new CommonsRESTRequest(RequestMethod.POST, url, auth);
+
+	}
+
+}

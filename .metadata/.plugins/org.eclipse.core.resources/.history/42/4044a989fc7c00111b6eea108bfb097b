@@ -1,0 +1,22 @@
+package com.handstandtech.flickr.tests;
+
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.restclient.server.auth.oauth.OAuthConsumerInfoManager;
+import com.handstandtech.restclient.server.auth.oauth.OAuthConsumerInfoManager.OAuthConsumerInfoSet;
+
+public class FlickrConstants {
+	// "Testing Java"
+	private static final String API_KEY = "d32f7335f0a3dd8c63f4f3fc312a37bc";
+	private static final String API_SECRET = "f6d7142634e935d1";
+	private static FlickrHelper flickrHelper;
+
+	public static FlickrHelper getFlickrHelper() {
+		if (flickrHelper = null) {
+			flickrHelper = new FlickrHelper(API_KEY, API_SECRET);
+		}
+		return flickrHelper;
+	}
+}

@@ -1,0 +1,276 @@
+what,kind,bundleId,bundleVersion,description,time
+error,log,,,"Failed while installing Dynamic Web Module 2.5.",1333390168525
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390171194
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390171265
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390177241
+started,bundle,org.eclipse.wst.web.ui,1.1.500.v201111030500,"org.eclipse.wst.web.ui",1333390181087
+started,bundle,org.eclipse.jst.server.core,1.2.202.v20110419,"org.eclipse.jst.server.core",1333390184711
+started,bundle,org.eclipse.wst.common.ui,1.1.500.v200911190730,"org.eclipse.wst.common.ui",1333390184910
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390185041
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390185127
+error,log,,,"Unhandled event loop exception",1333390185195
+started,bundle,org.eclipse.pde.core,3.7.0.v20110603,"org.eclipse.pde.core",1333390185215
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390190600
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390191912
+started,bundle,org.eclipse.equinox.p2.garbagecollector,1.0.200.v20110510,"org.eclipse.equinox.p2.garbagecollector",1333390197687
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390199515
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390231267
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390237758
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390279882
+error,log,,,"Unexpected error while validating FlickrServerConstants.java",1333390284529
+error,log,,,"Unexpected error while validating FlickrHelper.java",1333390284530
+error,log,,,"Unexpected error while validating FlickrAPIOAuth.java",1333390284532
+error,log,,,"Unexpected error while validating FlickrPhotoDAOImpl.java",1333390284542
+error,log,,,"Unexpected error while validating ProcessPhotosetActionController.java",1333390284547
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390292818
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390294478
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1333390294516
+activated,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.AllMarkersView",1333390302372
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333390314741
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390317157
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390332892
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390332949
+activated,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.AllMarkersView",1333390336966
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333390338116
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390341287
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390345784
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390345848
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390347984
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390348757
+executed,command,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.project.cleanAction",1333390348797
+error,log,,,"Unexpected error while validating FlickrServerConstants.java",1333390348945
+error,log,,,"Unexpected error while validating FlickrHelper.java",1333390348946
+error,log,,,"Unexpected error while validating FlickrAPIOAuth.java",1333390348948
+error,log,,,"Unexpected error while validating FlickrPhotoDAOImpl.java",1333390348949
+error,log,,,"Unexpected error while validating ProcessPhotosetActionController.java",1333390348951
+activated,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.AllMarkersView",1333390353755
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333390357356
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390359151
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333390363817
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333390366344
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390371198
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390371278
+activated,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.AllMarkersView",1333390402018
+opened,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1333390404966
+started,bundle,org.eclipse.core.variables,3.2.500.v20110511,"org.eclipse.core.variables",1333390405196
+started,bundle,org.eclipse.wst.jsdt.debug.ui,1.0.101.v201201112313,"org.eclipse.wst.jsdt.debug.ui",1333390405667
+activated,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1333390405678
+activated,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.AllMarkersView",1333390408743
+closed,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1333390408743
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.close",1333390408862
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333390410278
+executed,command,,,"com.google.gdt.eclipse.suite.launch.ui.webappLaunchShortcut.debug",1333390425861
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390425950
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390426924
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390431765
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390448294
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390451064
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333390501477
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390563436
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390563515
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390565385
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390598516
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.window.preferences",1333390598584
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390598865
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390599659
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390600223
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390601660
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390604042
+started,bundle,org.eclipse.ui.externaltools,3.2.0.v20110506,"org.eclipse.ui.externaltools",1333390605903
+started,bundle,org.eclipse.core.externaltools,1.0.100.v20110506,"org.eclipse.core.externaltools",1333390605967
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390624256
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390624318
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390627819
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390631032
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390631127
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390634214
+started,bundle,org.eclipse.wst.validation.ui,1.2.300.v201201050300,"org.eclipse.wst.validation.ui",1333390675771
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333390715264
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390747880
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.window.preferences",1333390747935
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390748013
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390749513
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390751685
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390779153
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.window.preferences",1333390779205
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390781988
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390784007
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390784066
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390785260
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390830452
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390832779
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390901782
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390901839
+error,log,,,"Unexpected error while validating FlickrServerConstants.java",1333390902275
+error,log,,,"Unexpected error while validating FlickrHelper.java",1333390902439
+error,log,,,"Unexpected error while validating FlickrAPIOAuth.java",1333390902440
+error,log,,,"Unexpected error while validating FlickrPhotoDAOImpl.java",1333390902442
+error,log,,,"Unexpected error while validating ProcessPhotosetActionController.java",1333390902443
+activated,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.AllMarkersView",1333390905688
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333390906999
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390908957
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390923700
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333390923778
+error,log,,,"Unexpected error while validating FlickrServerConstants.java",1333390924268
+error,log,,,"Unexpected error while validating FlickrHelper.java",1333390924324
+error,log,,,"Unexpected error while validating FlickrAPIOAuth.java",1333390924326
+error,log,,,"Unexpected error while validating FlickrPhotoDAOImpl.java",1333390924327
+error,log,,,"Unexpected error while validating ProcessPhotosetActionController.java",1333390924328
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390943458
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390958984
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390963717
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390964406
+error,log,,,"Unexpected error while validating FlickrServerConstants.java",1333390964618
+error,log,,,"Unexpected error while validating FlickrHelper.java",1333390964776
+error,log,,,"Unexpected error while validating FlickrAPIOAuth.java",1333390964777
+error,log,,,"Unexpected error while validating FlickrPhotoDAOImpl.java",1333390964778
+error,log,,,"Unexpected error while validating ProcessPhotosetActionController.java",1333390964780
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390968147
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390971814
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1333390971859
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390977134
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390977478
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390985450
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333390997553
+error,log,,,"Unexpected error while validating FlickrServerConstants.java",1333390997708
+error,log,,,"Unexpected error while validating FlickrHelper.java",1333390997885
+error,log,,,"Unexpected error while validating FlickrAPIOAuth.java",1333390997886
+error,log,,,"Unexpected error while validating FlickrPhotoDAOImpl.java",1333390997888
+error,log,,,"Unexpected error while validating ProcessPhotosetActionController.java",1333390997889
+opened,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1333391006960
+activated,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1333391007269
+executed,command,,,"AUTOGEN:::org.eclipse.wst.jsdt.internal.ui.CompilationUnitEditor.ruler.actions/org.eclipse.wst.jsdt.internal.ui.javaeditor.JavaSelectRulerAction",1333391009744
+executed,command,,,"AUTOGEN:::org.eclipse.wst.jsdt.internal.ui.CompilationUnitEditor.ruler.actions/org.eclipse.wst.jsdt.internal.ui.javaeditor.JavaSelectRulerAction",1333391012585
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333391019214
+closed,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1333391019214
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.close",1333391019230
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391033021
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391036198
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333391036262
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391046091
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391046481
+started,bundle,org.eclipse.jdt.debug,3.7.0.v20110509,"org.eclipse.jdt.debug",1333391050130
+started,bundle,org.eclipse.jdt.debug.ui,3.6.0.v20110512,"org.eclipse.jdt.debug.ui",1333391050198
+executed,command,,,"com.google.gdt.eclipse.suite.launch.ui.webappLaunchShortcut.debug",1333391054965
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391054986
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391055749
+started,bundle,org.eclipse.m2e.launching,1.0.0.20110607-2117,"org.eclipse.m2e.launching",1333391056138
+activated,view,org.eclipse.ui.console,3.5.100.v20110511,"org.eclipse.ui.console.ConsoleView",1333391063375
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333391068572
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391069789
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391079667
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.properties",1333391079705
+error,log,,,"Unexpected error while validating FlickrServerConstants.java",1333391079809
+error,log,,,"Unexpected error while validating FlickrHelper.java",1333391079811
+error,log,,,"Unexpected error while validating FlickrAPIOAuth.java",1333391079812
+error,log,,,"Unexpected error while validating FlickrPhotoDAOImpl.java",1333391079814
+error,log,,,"Unexpected error while validating ProcessPhotosetActionController.java",1333391079815
+activated,view,org.eclipse.ui.console,3.5.100.v20110511,"org.eclipse.ui.console.ConsoleView",1333391080303
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1333391082971
+executed,command,,,"com.google.gdt.eclipse.suite.launch.ui.webappLaunchShortcut.debug",1333391085923
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391085942
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391087429
+executed,command,,,"com.google.gdt.eclipse.suite.launch.ui.webappLaunchShortcut.debug",1333391091332
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391091352
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391091940
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391103319
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391112316
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391113866
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391117716
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391118929
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391196371
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391202402
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333391276809
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391277193
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391277776
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333391278209
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391278488
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391285992
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333391287289
+error,log,,,"Failed to load properties file for project 'net.onamap.android'",1333391303711
+started,bundle,org.eclipse.pde.launching,3.6.0.v20110506,"org.eclipse.pde.launching",1333391304342
+started,bundle,org.eclipse.ui.views.log,1.0.200.v20110404,"org.eclipse.ui.views.log",1333391304350
+started,bundle,org.eclipse.pde.ui,3.6.100.v20110603,"org.eclipse.pde.ui",1333391304351
+opened,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391304519
+opened,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.ProblemView",1333391304580
+opened,view,org.eclipse.mylyn.tasks.ui,3.6.0.v20110608-1400,"org.eclipse.mylyn.tasks.ui.views.tasks",1333391305695
+activated,perspective,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.JavaPerspective",1333391305727
+activated,view,org.eclipse.ui.views,3.6.0.I20110412-0800,"org.eclipse.ui.views.ContentOutline",1333391305729
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391305863
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.newWizard",1333391305927
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391349549
+started,bundle,org.eclipse.jdt.junit.core,3.7.0.v20110518-0800,"org.eclipse.jdt.junit.core",1333391353138
+executed,command,,,"com.android.ide.eclipse.adt.debug.launching.LaunchShortcut.debug",1333391354886
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391355538
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391358943
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391376293
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391386950
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391388866
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391396806
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391418233
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391430577
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391432441
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391433333
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391437723
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391437893
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391438077
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391440091
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391444550
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391446230
+opened,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391446641
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391446823
+executed,command,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.navigate.open.type",1333391446979
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333391449505
+started,bundle,org.eclipse.mylyn.java.tasks,3.6.0.v20110608-1400,"org.eclipse.mylyn.java.tasks",1333391449801
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391449808
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391452654
+opened,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391457945
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391458005
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391458177
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391458197
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391458197
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391464675
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391491561
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391494038
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391494333
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391497386
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391497547
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391499693
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391504654
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391508139
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391509996
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391510387
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391514357
+opened,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391514544
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391514588
+executed,command,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.navigate.open.type",1333391514592
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333391515493
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391515811
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391517404
+closed,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391517404
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.close",1333391517416
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391518060
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391520527
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391521843
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1333391521907
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391535419
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391540804
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391547163
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391564126
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391566019
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391566262
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391567132
+opened,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391568758
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391568806
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1333391580056
+executed,command,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.edit.text.java.format",1333391588550
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391602187
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1333391604005
+opened,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391604132
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391604181
+executed,command,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.navigate.open.type",1333391604234
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.selectAll",1333391606979
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1333391607241
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1333391607946
+opened,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391608201
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1333391608251

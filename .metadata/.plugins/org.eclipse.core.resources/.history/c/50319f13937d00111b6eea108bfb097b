@@ -1,0 +1,7 @@
+package com.handstandtech.flickr.server;
+
+public class FlickrURLBuilder {
+	public void go() {
+		FlickrHelper.API_KEY;
+	}
+}

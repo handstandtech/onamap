@@ -1,0 +1,7 @@
+package com.handstandtech.flickr.server;
+
+import com.handstandtech.restclient.server.RESTClient;
+
+public interface OAuthAuthenticatorProvider {
+	public RESTClient getNewClientInstance();
+}

@@ -1,0 +1,5 @@
+package com.handstandtech.flickr.server;
+
+public class ApacheCommonsOAuthAuthenticatorProvider implements OAuthAuthenticatorProvider {
+
+}

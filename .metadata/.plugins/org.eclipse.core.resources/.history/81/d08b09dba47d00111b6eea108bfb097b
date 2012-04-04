@@ -1,0 +1,114 @@
+package net.onamap.server.controller.action;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.onamap.server.constants.FlickrConstants;
+import net.onamap.server.dao.UserDAOImpl;
+import net.onamap.server.util.SessionHelper;
+import net.onamap.shared.model.User;
+import net.onamap.shared.model.User.FlickrUserInfo;
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+import oauth.signpost.exception.OAuthNotAuthorizedException;
+import oauth.signpost.http.HttpParameters;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.inject.Singleton;
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.flickr.server.FlickrPerm;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+
+/**
+ * An OAuth callback handler.
+ * 
+ * @author Sam Edwards
+ */
+@Singleton
+public class FlickrOAuth10aCallback extends HttpServlet {
+
+	private static Logger log = LoggerFactory
+			.getLogger(FlickrOAuth10aCallback.class.getName());
+
+	private static final long serialVersionUID = 1L;
+
+	private static UserDAOImpl userDao = new UserDAOImpl();
+
+	/**
+	 * Exchange an OAuth request token for an access token, and store the latter
+	 * in cookies.
+	 */
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		log.debug("Callback, twitter.");
+
+		try {
+			String oauth_verifier = request.getParameter("oauth_verifier");
+			log.debug("OAuth Verifier: " + oauth_verifier);
+
+			OAuthConsumer consumer = SessionHelper.getFlickrConsumer(request);
+			OAuthProvider provider = FlickrHelper.getFlickrOAuthProvider();
+
+			provider.setOAuth10a(true);
+			provider.retrieveAccessToken(consumer, oauth_verifier);
+
+			// ---------------------
+			String token = consumer.getToken();
+			String tokenSecret = consumer.getTokenSecret();
+			HttpParameters requestParams = consumer.getRequestParameters();
+
+			log.info("CONSUMER_KEY: " + consumer.getConsumerKey());
+			log.info("CONSUMER_SECRET: " + consumer.getConsumerSecret());
+			log.info("TOKEN: " + token);
+			log.info("TOKEN_SECRET: " + tokenSecret);
+			log.info("REQUEST_PARAMS: " + requestParams.size());
+			// ---------------------
+
+			for (String paramKey : requestParams.keySet()) {
+				log.info(paramKey + " [" + requestParams.get(paramKey) + "]");
+			}
+
+			FlickrHelper flickr = FlickrConstants.createFlickrHelper(token, tokenSecret);
+			FlickrUser flickrUser = flickr.test_login();
+
+			FlickrUserInfo flickrInfo = new FlickrUserInfo();
+			flickrInfo.setToken(token);
+			flickrInfo.setTokenSecret(tokenSecret);
+			flickrInfo.setUsername(flickrUser.getUsername().get_content());
+			flickrInfo.setId(flickrUser.getId());
+
+			User user = SessionHelper.getCurrentUser(request);
+			user.setFlickrInfo(flickrInfo);
+
+			log.info("Updating Current User with Flickr Info");
+			Long userId = userDao.updateUser(user);
+			user = userDao.findUser(userId);
+
+			SessionHelper.setCurrentUser(user, request, response);
+
+			// Clear out the Oauth consumer from the session
+			SessionHelper.setFlickrConsumer(request, null);
+
+			response.sendRedirect("/");
+		} catch (OAuthMessageSignerException e) {
+			e.printStackTrace();
+		} catch (OAuthExpectationFailedException e) {
+			e.printStackTrace();
+		} catch (OAuthCommunicationException e) {
+			e.printStackTrace();
+		} catch (OAuthNotAuthorizedException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

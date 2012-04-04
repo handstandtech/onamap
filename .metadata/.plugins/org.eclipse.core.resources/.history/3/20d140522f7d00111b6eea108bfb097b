@@ -1,0 +1,39 @@
+package net.onamap.android;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+import com.handstandtech.restclient.server.RESTClientCommonsImpl;
+import com.handstandtech.restclient.shared.model.RESTResult;
+import com.handstandtech.restclient.shared.model.RequestMethod;
+
+public class Welcome extends Activity {
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+
+//		RESTClientCommonsImpl client = new RESTClientCommonsImpl();
+//		RESTResult result = client.request(RequestMethod.GET,
+//				"http://google.com");
+//		Log.d("", result.toString());
+
+		go();
+
+	}
+
+	public void go() {
+		FlickrHelper flickr = FlickrConstants.createFlickrHelper(
+				"72157629620912897-909707b0f728d0ef", "9754f52f99728b82");
+		FlickrUser flickrUser = flickr.getCurrentUserInfo();
+		Toast.makeText(Welcome.this, flickrUser.getUsername().get_content(),
+				Toast.LENGTH_SHORT).show();
+
+	}
+}

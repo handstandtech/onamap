@@ -1,0 +1,54 @@
+/**
+ * Handstand Technologies, LLC
+ * http://handstandtech.com
+ */
+package com.handstandtech.restclient.server.auth.oauth;
+
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.shared.model.RequestAuthentication;
+
+public class JavaNetOAuthAuthenticator implements Authenticator {
+
+	private OAuthConsumer consumer;
+
+	public JavaNetOAuthAuthenticator(OAuthConsumer consumer) {
+		this.setConsumer(consumer);
+	}
+
+	public void setConsumer(OAuthConsumer consumer) {
+		this.consumer = consumer;
+	}
+
+	public OAuthConsumer getConsumer() {
+		return consumer;
+	}
+
+	@Override
+	public void authenticate(Object connection) {
+		if (consumer != null) {
+			try {
+				consumer.sign(connection);
+			} catch (OAuthMessageSignerException e) {
+
+				e.printStackTrace();
+			} catch (OAuthExpectationFailedException e) {
+
+				e.printStackTrace();
+			} catch (OAuthCommunicationException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public RequestAuthentication getRequestAuthenticationType() {
+		return RequestAuthentication.OAUTH;
+	}
+
+}

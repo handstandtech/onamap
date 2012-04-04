@@ -1,0 +1,20 @@
+package net.onamap.android;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("Hi");
+		// OAuthConsumer consumer = FlickrConstants.getOAuthConsumer();
+		// consumer.setTokenWithSecret("72157629620912897-909707b0f728d0ef",
+		// "9754f52f99728b82");
+		// FlickrHelper flickr = new FlickrHelper();
+		// FlickrUser flickrUser = flickr.getCurrentUserInfo();
+
+		FlickrHelper flickr = FlickrConstants.createFlickrHelper(
+				"72157629620912897-909707b0f728d0ef", "9754f52f99728b82");
+		FlickrUser flickrUser = flickr.getCurrentUserInfo();
+		System.out.println(flickrUser.getUsername());
+	}
+}

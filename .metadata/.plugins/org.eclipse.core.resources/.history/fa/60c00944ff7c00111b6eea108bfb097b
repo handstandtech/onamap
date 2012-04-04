@@ -1,0 +1,24 @@
+package net.onamap.android;
+
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+
+public class FlickrConstants {
+	// "Testing Java"
+	private static final String API_KEY = "d32f7335f0a3dd8c63f4f3fc312a37bc";
+	private static final String API_SECRET = "f6d7142634e935d1";
+
+	public static FlickrHelper createFlickrHelper() {
+
+		OAuthConsumer consumer = new CommonsHttpOAuthConsumer(API_KEY, API_SECRET);
+		FlickrHelper flickr = new FlickrHelper(consumer);
+		return flickr; 
+	}
+
+	public static FlickrHelper createFlickrHelper(String token,
+			String tokenSecret) {
+		return new FlickrHelper(API_KEY, API_SECRET);
+	}
+}

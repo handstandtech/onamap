@@ -1,0 +1,8 @@
+package net.onamap.android;
+
+public class Snippet {
+	public static void main(String[] args) {
+		FlickrStringContent
+	}
+}
+

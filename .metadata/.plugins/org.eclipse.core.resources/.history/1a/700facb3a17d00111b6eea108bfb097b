@@ -1,0 +1,56 @@
+package net.onamap.android;
+
+import java.io.File;
+import java.io.IOException;
+
+import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import com.handstandtech.flickr.server.FlickrHelper;
+import com.handstandtech.flickr.shared.model.FlickrPhotosetInfos;
+import com.handstandtech.flickr.shared.model.FlickrUser;
+
+public class Welcome extends Activity {
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+
+		// RESTClientCommonsImpl client = new RESTClientCommonsImpl();
+		// RESTResult result = client.request(RequestMethod.GET,
+		// "http://google.com");
+		// Log.d("", result.toString());
+
+		go();
+
+	}
+
+	public void go() {
+//		FlickrHelper flickr = FlickrConstants.createFlickrHelper(
+//				"72157629620912897-909707b0f728d0ef", "9754f52f99728b82");
+//		FlickrUser flickrUser = flickr.test_login();
+//		Toast.makeText(Welcome.this, flickrUser.getUsername().get_content(),
+//				Toast.LENGTH_SHORT).show();
+//
+//		FlickrPhotosetInfos infos = flickr
+//				.photosets_getList(flickrUser.getId());
+//		Toast.makeText(Welcome.this,
+//				"Photosets: " + infos.getPhotoset().size(), Toast.LENGTH_SHORT)
+//				.show();
+
+		File file = new File("///android_asset/htech.jpg");
+		try {
+			Toast.makeText(Welcome.this,
+					"Exists: " + file.exists() + " -- Path: "+ file.getCanonicalPath().toString(), Toast.LENGTH_SHORT)
+					.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}

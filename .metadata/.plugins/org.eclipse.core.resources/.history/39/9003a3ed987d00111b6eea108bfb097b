@@ -1,0 +1,155 @@
+/**
+ * Copyright (C) 2010 Handstand Technologies, LLC
+ * http://handstandtech.com
+ */
+package com.handstandtech.restclient.server.impl;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
+
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.server.impl.RESTClientBaseImpl;
+import com.handstandtech.restclient.server.model.RESTRequest;
+import com.handstandtech.restclient.shared.model.RESTResult;
+import com.handstandtech.restclient.shared.model.RequestAuthentication;
+import com.handstandtech.restclient.shared.model.RequestMethod;
+
+public class RESTClientCommonsImpl extends RESTClientBaseImpl {
+
+	public RESTClientCommonsImpl() {
+		super();
+	}
+
+	@Override
+	public RESTResult internalDoRequest(RequestMethod method, String urlString,
+			Authenticator auth, byte[] payload, Map<String, String> headers)
+			throws IOException {
+		RESTResult result = null;
+		try {
+			RESTRequest request = new RESTRequest();
+			request.setMethod(method);
+			request.setUrl(urlString);
+			request.setAuth(auth);
+			request.setPayload(payload);
+			request.setHeaders(headers);
+			result = request(request);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	@Override
+	public RESTResult request(RESTRequest restRequest) {
+		RESTResult result = new RESTResult();
+		result.setUrl(restRequest.getUrl());
+
+		// create an HTTP request to a protected resource
+		HttpUriRequest request = null;
+
+		RequestMethod method = restRequest.getMethod();
+		String urlString = restRequest.getUrl();
+		byte[] payload = restRequest.getPayload();
+		
+		result.setRequestMethod(method);
+		switch (method) {
+		case GET:
+			request = new HttpGet(restRequest.getUrl());
+			break;
+		case POST:
+			HttpPost postRequest = new HttpPost(urlString);
+			if (payload != null) {
+				ByteArrayEntity postEntity = new ByteArrayEntity(payload);
+				postEntity.setChunked(true);
+				postRequest.setEntity(postEntity);
+			}
+			request = postRequest;
+			break;
+		case PUT:
+			HttpPut putRequest = new HttpPut(urlString);
+			if (payload != null) {
+				ByteArrayEntity putEntity = new ByteArrayEntity(payload);
+				putEntity.setChunked(true);
+				putRequest.setEntity(putEntity);
+			}
+			request = putRequest;
+			break;
+		case DELETE:
+			request = new HttpDelete(urlString);
+			break;
+		}
+
+		// send the request
+		HttpClient httpClient = new DefaultHttpClient();
+
+		if (requestHeaders != null) {
+			for (String key : requestHeaders.keySet()) {
+				String value = requestHeaders.get(key);
+				request.addHeader(key, value);
+			}
+		}
+
+		// Authenticate if required
+		if (auth != null) {
+			auth.authenticate(request);
+			result.setRequestAuthentication(auth.getRequestAuthenticationType());
+		} else {
+			result.setRequestAuthentication(RequestAuthentication.NONE);
+		}
+
+		HttpResponse response = httpClient.execute(request);
+
+		// Examine the response status
+		System.out.println(response.getStatusLine());
+
+		try {
+
+			// Get hold of the response entity
+			HttpEntity entity = response.getEntity();
+
+			InputStream inputStream = entity.getContent();
+
+			InputStreamReader inputStreamReader = new InputStreamReader(
+					inputStream, "UTF-8");
+			BufferedReader reader = new BufferedReader(inputStreamReader);
+			String line = null;
+			StringBuffer responseBody = new StringBuffer();
+			while ((line = reader.readLine()) != null) {
+				responseBody.append(line + "\n");
+			}
+
+			result.setResponseBody(responseBody.toString());
+
+			// 200, 404, 500, etc
+			int responseCode = response.getStatusLine().getStatusCode();
+			result.setResponseCode(responseCode);
+
+			Header[] responseHeaders = response.getAllHeaders();
+			for (Header header : responseHeaders) {
+				String headerName = header.getName();
+				String headerValue = header.getValue();
+				result.addResponseHeader(headerName, headerValue);
+			}
+
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+
+		return result;
+	}
+}

@@ -1,0 +1,13 @@
+package com.handstandtech.restclient.server.auth;
+
+import com.handstandtech.restclient.server.model.RESTRequest;
+
+public class RESTRequest extends RESTRequest {
+
+	private static final long serialVersionUID = 1L;
+
+	public RESTRequest() {
+		
+	}
+
+}

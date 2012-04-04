@@ -1,0 +1,18 @@
+package com.handstandtech.flickr.server;
+
+import oauth.signpost.OAuthConsumer;
+
+public class CommonsFlickrHelper extends FlickrHelper {
+	public CommonsFlickrHelper(OAuthConsumer consumer,
+			RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, restProvider, oAuthProvider);
+	}
+
+	public CommonsFlickrHelper(OAuthConsumer consumer, String token,
+			String tokenSecret, RESTClientProvider restProvider,
+			OAuthAuthenticatorProvider oAuthProvider) {
+		super(consumer, token, tokenSecret, restProvider, oAuthProvider);
+	}
+
+}

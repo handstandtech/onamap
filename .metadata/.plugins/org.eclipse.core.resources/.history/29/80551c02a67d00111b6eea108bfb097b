@@ -1,0 +1,20 @@
+package com.handstandtech.flickr.server;
+
+public enum FlickrSafetyLevel {
+	PHOTO(1), SCREENSHOT(2), OTHER(3);
+
+	private int value;
+
+	private FlickrSafetyLevel(int value) {
+		this.setValue(value);
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+}
