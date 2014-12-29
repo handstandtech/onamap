@@ -53,8 +53,14 @@ public class Photo implements Serializable {
 
     @PrePersist
     public void PrePersist() {
-        Date now = new Date();
-        this.lastUpdated = now;
+        this.lastUpdated = new Date();
+    }
+
+    public Date getLastUpdated() {
+        if (lastUpdated == null) {
+            lastUpdated = new Date();
+        }
+        return lastUpdated;
     }
 
 

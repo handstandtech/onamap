@@ -79,7 +79,7 @@ public class OnAMapHTTPResource {
         if (subdomainUser != null) {
             RequestHelper.set(request, RequestParams.SUBDOMAIN,
                     subdomain);
-            new CalculatePhotosetStatsActionController().doGet(request);
+            new CalculatePhotosetStatsActionController().doGet(subdomainUser, request);
             log.info("Showing Profile View: " + subdomain);
             return Response.ok(new Viewable(Pages.PROFILE)).build();
         }

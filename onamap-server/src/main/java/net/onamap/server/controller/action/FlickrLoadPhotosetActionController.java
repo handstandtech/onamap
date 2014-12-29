@@ -80,53 +80,57 @@ public class FlickrLoadPhotosetActionController extends
             FlickrHelper flickr = FlickrConstants.createFlickrHelper(
                     flickrInfo.getToken(), flickrInfo.getTokenSecret());
 
+
+            FlickrPhotosetInfo photosetInfo = getPhotosetInfo(request, flickrPhotosetId);
+
             // Create our photoset and add to db
-            Photoset photoset = photosetDao
-                    .findPhotosetByFlickrId(flickrPhotosetId);
-            String photosetId = null;
-            if (photoset != null) {
-                photosetId = photoset.getId();
-            } else {
+            Photoset photoset = photosetDao.findPhotosetByFlickrId(flickrPhotosetId);
+            if (photoset == null) {
                 photoset = new Photoset();
                 photoset.setId(flickrPhotosetId);
-                setPhotosetTitleAndDescription(request, photoset);
-                photoset.setUserId(user.getId());
-                photosetId = photosetDao.updatePhotoset(photoset);
             }
+
+            if (photosetInfo != null) {
+                photoset.setTitle(photosetInfo.getTitle().get_content());
+                photoset.setDescription(photosetInfo.getDescription().get_content());
+                photoset.setCount(photosetInfo.getPhotos());
+            }
+            photoset.setUserId(user.getId());
+            photosetDao.updatePhotoset(photoset);
             user.setFlickrPhotosetId(flickrPhotosetId);
 
             Long userId = userDao.updateUser(user);
             user = userDao.findUser(userId);
             SessionHelper.setCurrentUser(user, request, response);
 
-            FlickrPhotoset flickrPhotoset = flickr
-                    .photosets_getPhotos(flickrPhotosetId);
-            System.out.println("photos: " + flickrPhotoset);
+            List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
 
-            List<FlickrPhoto> flickrPhotos = flickrPhotoset.getPhotos();
-            for (FlickrPhoto flickrPhoto : flickrPhotos) {
+            for (FlickrPhoto flickrPhoto : allFlickrPhotosInPhotoset) {
 
                 // Get the photo out of the database
                 Photo photoFromLocalDB = photoDao.findPhotoByFlickrId(flickrPhoto.getId());
                 if (photoFromLocalDB == null) {
+                    //Not in DB
                     photoFromLocalDB = new Photo(flickrPhoto);
                     photoFromLocalDB.setFlickrPhotosetId(flickrPhotosetId);
                     String photoId = photoDao.updatePhoto(photoFromLocalDB);
                     toReverseGeocode.add(photoId);
                 } else {
+                    //In DB, but outdated.
                     // If it's been updated more recently..
-                    if (flickrPhoto.getLatitude() != photoFromLocalDB.getLatitude() || flickrPhoto.getLongitude() != photoFromLocalDB.getLongitude()) {
-                        log.info(photoFromLocalDB.getFlickrLastUpdatedTime() + " vs " + flickrPhoto.getLastupdate());
-//                    if (flickrPhoto.getLastupdate() > photoFromLocalDB.getLastupdate()) {
+                    boolean coordsChanged = flickrPhoto.getLatitude() != photoFromLocalDB.getLatitude() || flickrPhoto.getLongitude() != photoFromLocalDB.getLongitude();
+                    boolean hasBeenUpdated = flickrPhoto.getLastupdate() > photoFromLocalDB.getLastUpdated().getTime();
+                    if (coordsChanged || hasBeenUpdated) {
                         photoFromLocalDB.setFlickrPhoto(flickrPhoto);
                         photoFromLocalDB.setFlickrPhotosetId(flickrPhotosetId);
                         String photoId = photoDao.updatePhoto(photoFromLocalDB);
                         toReverseGeocode.add(photoId);
                     }
                 }
-
             }
-            request.setAttribute("photos", flickrPhotos);
+
+
+            request.setAttribute("photos", allFlickrPhotosInPhotoset);
 
             for (String photoId : toReverseGeocode) {
                 // TODO Task to Reverse Geocode
@@ -138,16 +142,41 @@ public class FlickrLoadPhotosetActionController extends
                 build();
     }
 
-    private void setPhotosetTitleAndDescription(HttpServletRequest request, Photoset photoset) {
+    private List<FlickrPhoto> getAllFlickrPhotosInPhotoset(FlickrHelper flickr, FlickrPhotosetInfo photosetInfo) {
+        log.info("getAllFlickrPhotosInPhotoset: " + photosetInfo);
+        List<FlickrPhoto> flickrPhotos = new ArrayList<FlickrPhoto>();
+        Integer photosCount = photosetInfo.getPhotos();
+        Integer count = 0;
+        Integer page = 1;
+        Integer per_page = 500;
+        while (count < photosCount) {
+            FlickrPhotoset flickrPhotoset = flickr.photosets_getPhotos(photosetInfo.getId(), page, per_page);
+            List<FlickrPhoto> photosInPage = flickrPhotoset.getPhotos();
+            flickrPhotos.addAll(photosInPage);
+            page++;
+            count += per_page;
+        }
+        return flickrPhotos;
+    }
+
+    private List<FlickrPhoto> getPhotosInPage(FlickrHelper flickr, String flickrPhotosetId, Integer page, Integer per_page) {
+        FlickrPhotoset flickrPhotoset = flickr
+                .photosets_getPhotos(flickrPhotosetId, page, per_page);
+        System.out.println("photos: " + flickrPhotoset);
+        List<FlickrPhoto> flickrPhotos = flickrPhotoset.getPhotos();
+        return flickrPhotos;
+    }
+
+    private FlickrPhotosetInfo getPhotosetInfo(HttpServletRequest request, String photosetId) {
         FlickrPhotosetInfos photosetInfos = (FlickrPhotosetInfos) request.getSession().getAttribute("photosets");
         List<FlickrPhotosetInfo> photosets = photosetInfos.getPhotoset();
         if (photosets != null && !photosets.isEmpty()) {
             for (FlickrPhotosetInfo currInfo : photosets) {
-                if (currInfo.getId().equalsIgnoreCase(photoset.getId())) {
-                    photoset.setTitle(currInfo.getTitle().get_content());
-                    photoset.setDescription(currInfo.getDescription().get_content());
+                if (currInfo.getId().equalsIgnoreCase(photosetId)) {
+                    return currInfo;
                 }
             }
         }
+        return null;
     }
 }

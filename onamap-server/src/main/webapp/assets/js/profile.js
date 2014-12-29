@@ -68,7 +68,7 @@ var usMap = {
             console.log("Photo ID: " + photoId);
             var photo = json.photosMap[photoId];
             console.log(photo);
-            var img = $('<img src="' + photo.url_sq + '"/>');
+            var img = $('<a href="' + photo.link + '" target="_blank"><img src="' + photo.url_sq + '"/></a>');
             bottom.append(img);
         }
     },
@@ -189,7 +189,7 @@ var gmap = {
 
         for (var photoId in json.photosMap) {
             var photo = json.photosMap[photoId];
-            gmap.addPhoto(photo.lat, photo.lng, photo.title, photo.url_s);
+            gmap.addPhoto(photo);
         }
     },
     reset: function () {
@@ -199,10 +199,11 @@ var gmap = {
         'http://labs.google.com/ridefinder/images/mm_20_red.png'),
     shadow: new google.maps.MarkerImage(
         'http://labs.google.com/ridefinder/images/mm_20_shadow.png'),
-    addPhoto: function (lat, lng, title, imgsrc) {
+    addPhoto: function (photo) {
+        var lat = photo.lat, lng = photo.lng, title = photo.title, imgsrc = photo.url_s, link = photo.link;
         var latlng = new google.maps.LatLng(lat, lng);
-        var contentString = '<div id="content">' + title + '<br/><img src="'
-            + imgsrc + '"/></div>';
+        var contentString = '<div id="content"><a href="' + link + '" target="_blank">' + title + '<br/><img src="'
+            + imgsrc + '"/></a></div>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });

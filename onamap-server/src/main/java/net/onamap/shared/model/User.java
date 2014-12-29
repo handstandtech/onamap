@@ -53,6 +53,7 @@ public class User implements Serializable {
 
 		private String username;
 		private String id;
+        private String nsid;
 		private String token;
 		private String tokenSecret;
 	}

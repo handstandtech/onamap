@@ -25,6 +25,8 @@ public class Photoset implements Serializable {
 
     private String title;
 
+    private Integer count;
+
     private String description;
 
     @Index

@@ -132,6 +132,7 @@ public class FlickrConnectResource extends HttpServlet {
 
             User.FlickrUserInfo flickrInfo = new User.FlickrUserInfo();
             flickrInfo.setToken(token);
+            flickrInfo.setNsid(flickrUser.getNsid());
             flickrInfo.setTokenSecret(tokenSecret);
             flickrInfo.setUsername(flickrUser.getUsername().get_content());
             flickrInfo.setId(flickrUser.getId());
