@@ -31,7 +31,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 @Singleton
@@ -105,31 +107,39 @@ public class FlickrLoadPhotosetActionController extends
 
             List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
 
+            List<String> photoIds = new ArrayList<String>();
             for (FlickrPhoto flickrPhoto : allFlickrPhotosInPhotoset) {
+                photoIds.add(flickrPhoto.getId());
+            }
+
+            Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoIds);
+            List<Photo> photosToUpdate = new ArrayList<Photo>();
+            for (FlickrPhoto flickrPhoto : allFlickrPhotosInPhotoset) {
+                String flickrPhotoId = flickrPhoto.getId();
 
                 // Get the photo out of the database
-                Photo photoFromLocalDB = photoDao.findPhotoByFlickrId(flickrPhoto.getId());
+                Photo photoFromLocalDB = photosByIdInDB.get(flickrPhotoId);
                 if (photoFromLocalDB == null) {
                     //Not in DB
                     photoFromLocalDB = new Photo(flickrPhoto);
                     photoFromLocalDB.setFlickrPhotosetId(flickrPhotosetId);
-                    String photoId = photoDao.updatePhoto(photoFromLocalDB);
-                    toReverseGeocode.add(photoId);
+                    toReverseGeocode.add(flickrPhotoId);
                 } else {
                     //In DB, but outdated.
                     // If it's been updated more recently..
-                    boolean coordsChanged = flickrPhoto.getLatitude() != photoFromLocalDB.getLatitude() || flickrPhoto.getLongitude() != photoFromLocalDB.getLongitude();
-                    boolean hasBeenUpdated = flickrPhoto.getLastupdate() > photoFromLocalDB.getLastUpdated().getTime();
-                    if (coordsChanged || hasBeenUpdated) {
+//                    boolean coordsChanged = flickrPhoto.getLatitude() != photoFromLocalDB.getLatitude() || flickrPhoto.getLongitude() != photoFromLocalDB.getLongitude();
+                    Date localDBLastUpdateDate = photoFromLocalDB.getLastUpdated();
+                    boolean haveUpToDateVersion = localDBLastUpdateDate != null && flickrPhoto.getLastupdate() < localDBLastUpdateDate.getTime();
+                    if (haveUpToDateVersion == false) {
                         photoFromLocalDB.setFlickrPhoto(flickrPhoto);
                         photoFromLocalDB.setFlickrPhotosetId(flickrPhotosetId);
-                        String photoId = photoDao.updatePhoto(photoFromLocalDB);
-                        toReverseGeocode.add(photoId);
+                        toReverseGeocode.add(flickrPhotoId);
                     }
                 }
+                photosToUpdate.add(photoFromLocalDB);
             }
 
-
+            photoDao.updatePhotos(photosToUpdate);
             request.setAttribute("photos", allFlickrPhotosInPhotoset);
 
             for (String photoId : toReverseGeocode) {

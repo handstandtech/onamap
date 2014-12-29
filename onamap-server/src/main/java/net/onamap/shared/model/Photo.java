@@ -56,14 +56,6 @@ public class Photo implements Serializable {
         this.lastUpdated = new Date();
     }
 
-    public Date getLastUpdated() {
-        if (lastUpdated == null) {
-            lastUpdated = new Date();
-        }
-        return lastUpdated;
-    }
-
-
     public void setFlickrPhoto(FlickrPhoto p) {
         this.id = p.getId();
         this.url_m = p.getUrl_m();
