@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.onamap</groupId>
+    <artifactId>server</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Licert</name>
+    <url>http://www.licert.com</url>
+    <organization>
+        <name>Handstand Technologies, LLC</name>
+        <url>http://handstandtech.com</url>
+    </organization>
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>objectify-appengine</id>
+            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
+        </repository>
+        <repository>
+            <id>sonatype.snapshots</id>
+            <name>Sonatype snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>handstandtech-maven-repo</id>
+            <name>Handstand Technologies Maven Repository</name>
+            <url>https://handstandtech.s3.amazonaws.com/maven-repository</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>miredot</id>
+            <name>MireDot Releases</name>
+            <url>http://nexus.qmino.com/content/repositories/miredot</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <developers>
+        <developer>
+            <id>handstandsam</id>
+            <name>Sam Edwards</name>
+            <email>sam@handstandtech.com</email>
+            <url>http://handstandtech.com</url>
+            <organization>Handstand Technologies, LLC</organization>
+            <organizationUrl>http://handstandtech.com</organizationUrl>
+        </developer>
+    </developers>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/handstandtech/Licert/issues</url>
+    </issueManagement>
+
+    <properties>
+        <!-- Project properties -->
+        <target.jdk>1.7</target.jdk>
+        <project.encoding>UTF-8</project.encoding>
+
+        <!-- Dependencies versions -->
+        <aopalliance.version>1.0</aopalliance.version>
+        <gae.version>1.9.17</gae.version>
+        <guice.version>3.0</guice.version>
+        <gson.version>2.3</gson.version>
+        <junit.version>4.11</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+        <lombok.version>1.14.8</lombok.version>
+        <objectify.version>4.0rc1</objectify.version>
+        <persistence-api.version>1.0</persistence-api.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <opencsv.version>2.0</opencsv.version>
+        <taglibs.version>1.1.2</taglibs.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <geocell.version>901</geocell.version>
+        <jsoup.version>1.7.3</jsoup.version>
+        <validation-api.version>1.0.0.GA</validation-api.version>
+        <restclient.version>0.9.2-SNAPSHOT</restclient.version>
+        <stripe.version>1.18.0</stripe.version>
+        <java-util-logging.version>1.1.1</java-util-logging.version>
+        <jersey.version>1.18.1</jersey.version>
+        <jersey-guice.version>1.18.1</jersey-guice.version>
+        <commons-logging.version>1.2</commons-logging.version>
+
+        <!-- Plugin properties -->
+        <maven-assembly-plugin.version>2.2.1</maven-assembly-plugin.version>
+        <maven-checkstyle-plugin.version>2.6</maven-checkstyle-plugin.version>
+        <maven-clean-plugin.version>2.3</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
+        <maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
+        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+        <maven-resources-plugin.version>2.5</maven-resources-plugin.version>
+        <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
+        <maven-war-plugin.version>2.3</maven-war-plugin.version>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+    </properties>
+    <dependencies>
+        <!-- Handstand Tech Dependencies -->
+        <dependency>
+            <groupId>com.handstandtech</groupId>
+            <artifactId>restclient-server</artifactId>
+            <version>${restclient.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.handstandtech</groupId>
+            <artifactId>restclient-oauth</artifactId>
+            <version>${restclient.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.handstandtech</groupId>
+            <artifactId>flickr</artifactId>
+            <version>0.9.3-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Geocell -->
+        <dependency>
+            <groupId>com.beoui</groupId>
+            <artifactId>geocell</artifactId>
+            <version>${geocell.version}</version>
+        </dependency>
+
+        <!-- General dependencies for standard applications -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>oauth.signpost</groupId>
+            <artifactId>signpost-core</artifactId>
+            <version>1.2.1.2</version>
+        </dependency>
+
+        <!-- jsoup HTML parser library @ http://jsoup.org/ -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv.version}</version>
+        </dependency>
+
+        <!-- Objectify -->
+        <dependency>
+            <groupId>com.googlecode.objectify</groupId>
+            <artifactId>objectify</artifactId>
+            <version>${objectify.version}</version>
+        </dependency>
+
+        <!-- GAE dependencies -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${gae.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${gae.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.handstandtech.facebook</groupId>
+            <artifactId>server</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Guice & GIN dependencies -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>${aopalliance.version}</version>
+        </dependency>
+
+        <!-- GSON -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <!-- Make use of JSP tags. Remove, if you don't use JSPs -->
+        <dependency>
+            <artifactId>standard</artifactId>
+            <groupId>taglibs</groupId>
+            <version>${taglibs.version}</version>
+            <type>jar</type>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <!-- Jersey -->
+        <!-- JAX-RS -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-core</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-guice</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${gae.version}</version>
+                <configuration>
+                    <appDir>${webapp.directory}</appDir>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${target.jdk}</source>
+                    <target>${target.jdk}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!--outputDirectory>${output.directory}</outputDirectory-->
+    </build>
+    <!-- BUILD PROFILES -->
+    <profiles>
+        <!-- DEVELOPMENT -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <webapp.directory>${project.basedir}/src/main/webapp</webapp.directory>
+                <output.directory>${webapp.directory}/WEB-INF/classes</output.directory>
+                <appengine.appDir>${webapp.directory}</appengine.appDir>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webappDirectory>${webapp.directory}</webappDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>exploded-war</id>
+                                <goals>
+                                    <goal>exploded</goal>
+                                    <goal>inplace</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-clean</id>
+                                <phase>clean</phase>
+                                <configuration>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${output.directory}</directory>
+                                            <includes>
+                                                <include>**/*.class</include>
+                                            </includes>
+                                            <followSymlinks>false</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>src/main/webapp/WEB-INF/classes</directory>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>src/main/webapp/WEB-INF/lib</directory>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>src/main/webapp/WEB-INF/deploy</directory>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- RELEASE -->
+        <profile>
+            <id>release</id>
+
+            <properties>
+                <!--output.directory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
+                </output.directory-->
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>exploded-war</id>
+                                <goals>
+                                    <!--goal>exploded</goal-->
+                                    <goal>inplace</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

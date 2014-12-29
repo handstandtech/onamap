@@ -1,1 +1,9 @@
 .DS_Store
+onamap-server/target
+onamap-server/before
+onamap-server/.idea
+onamap-server/.classpath
+onamap-server/.project
+onamap-server/src/main/webapp/WEB-INF/appengine-generated
+
+onamap-server/src/main/webapp/WEB-INF/lib

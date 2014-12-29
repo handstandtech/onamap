@@ -1,0 +1,38 @@
+package net.onamap.server.dao;
+
+import com.googlecode.objectify.cmd.QueryKeys;
+import lombok.NoArgsConstructor;
+import net.onamap.shared.model.Photoset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static net.onamap.server.objectify.OfyService.ofy;
+
+@NoArgsConstructor
+public class PhotosetDAOImpl {
+
+    private static Logger log = LoggerFactory.getLogger(PhotosetDAOImpl.class);
+
+
+    public String updatePhotoset(Photoset photoset) {
+        return ofy().save().entity(photoset).now().getName();
+    }
+
+    public Photoset findPhotoset(Long id) {
+        return ofy().load().type(Photoset.class).first().now();
+    }
+
+    public void deleteAllPhotosets() {
+        QueryKeys keys = ofy().load().type(Photoset.class).keys();
+        ofy().delete().keys(keys);
+    }
+
+    public Photoset findPhotosetForUserId(Long id) {
+        return ofy().load().type(Photoset.class).filter("userId", id).first().now();
+    }
+
+    public Photoset findPhotosetByFlickrId(String flickrPhotosetId) {
+        return ofy().load().type(Photoset.class).filter("flickrPhotosetId", flickrPhotosetId).first().now();
+    }
+
+}

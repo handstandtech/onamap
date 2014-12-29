@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+	<application>onamapdotnet</application>
+	<version>2014-12-28--01</version>
+	<!-- http://code.google.com/appengine/docs/java/config/appconfig.html -->
+	<precompilation-enabled>true</precompilation-enabled>
+	<sessions-enabled>true</sessions-enabled>
+	<!-- By default, App Engine sends requests serially to a given web server. 
+		To allow App Engine to send multiple requests in parallel specify: <threadsafe>true</threadsafe> -->
+	<threadsafe>true</threadsafe>
+
+	<!-- Configure java.util.logging -->
+	<system-properties>
+		<property name="java.util.logging.config.file" value="WEB-INF/java-util-logging.properties" />
+		
+		<!-- https://code.google.com/p/googleappengine/issues/detail?id=1267 -->
+		<property name="com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize"
+			value="true" />
+	</system-properties>
+	<static-files>
+		<include path="/assets/**" />
+	</static-files>
+
+	<admin-console>
+		<page name="Appstats" url="/appstats" />
+		<page name="Cache Tools" url="/cache" />
+	</admin-console>
+
+	<inbound-services>
+		<service>channel_presence</service>
+	</inbound-services>
+	
+</appengine-web-app>
