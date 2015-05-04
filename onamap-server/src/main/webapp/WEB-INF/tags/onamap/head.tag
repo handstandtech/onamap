@@ -29,6 +29,6 @@
     <link type="text/css" rel="stylesheet" href="/assets/css/style.css"/>
     <meta name="robots" content="all"/>
     <script type="text/javascript"
-            src="/assets/js/jquery/jquery-1.7.1.min.js"></script>
+            src="/assets/js/jquery/jquery-1.11.2.min.js"></script>
     <jsp:doBody/>
 </head>

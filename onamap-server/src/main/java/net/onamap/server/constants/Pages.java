@@ -4,6 +4,7 @@ public class Pages {
 	private static final String PREFIX = "/WEB-INF/pages/";
 	public static final String HOME = PREFIX + "home.jsp";
 	public static final String PROFILE = PREFIX + "profile.jsp";
+    public static final String PROFILE_BOOTSTRAP = PREFIX + "profilebootstrap.jsp";
 	public static final String INDEX = PREFIX + "index.jsp";
 	public static final String LOGIN = PREFIX + "login.jsp";
 	public static final String ERROR = PREFIX + "error.jsp";

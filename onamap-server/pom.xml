@@ -6,8 +6,8 @@
     <artifactId>server</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Licert</name>
-    <url>http://www.licert.com</url>
+    <name>On a Map</name>
+    <url>http://www.onamap.net</url>
     <organization>
         <name>Handstand Technologies, LLC</name>
         <url>http://handstandtech.com</url>

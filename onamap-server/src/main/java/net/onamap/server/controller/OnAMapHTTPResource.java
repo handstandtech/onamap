@@ -66,6 +66,8 @@ public class OnAMapHTTPResource {
                             @PathParam("username") String subdomain) {
         Response res = showProfile(request, subdomain);
         if (res != null) {
+            RequestHelper.set(request, RequestParams.USERNAME,
+                    subdomain);
             return res;
         }
         return Response.temporaryRedirect(URI.create(Urls.HOME)).build();
@@ -81,7 +83,7 @@ public class OnAMapHTTPResource {
                     subdomain);
             new CalculatePhotosetStatsActionController().doGet(subdomainUser, request);
             log.info("Showing Profile View: " + subdomain);
-            return Response.ok(new Viewable(Pages.PROFILE)).build();
+            return Response.ok(new Viewable(Pages.PROFILE_BOOTSTRAP)).build();
         }
         return null;
     }

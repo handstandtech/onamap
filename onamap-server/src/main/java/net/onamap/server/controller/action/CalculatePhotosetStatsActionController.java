@@ -121,12 +121,16 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         private Double lat;
         private Double lng;
         private String link;
+        private Long datetaken;
 
         public PhotoLite(String flickrId, Photo photo) {
             url_sq = photo.getUrl_sq();
             url_s = photo.getUrl_s();
             lat = photo.getLatitude();
             lng = photo.getLongitude();
+            if(photo.getDatetaken()!=null){
+                this.datetaken = photo.getDatetaken().getTime();
+            }
             title = photo.getTitle();
             link = "https://www.flickr.com/photos/" + flickrId + "/" + photo.getId();
         }
