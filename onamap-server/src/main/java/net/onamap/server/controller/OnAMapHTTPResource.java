@@ -1,5 +1,7 @@
 package net.onamap.server.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.inject.Singleton;
 import com.sun.jersey.api.view.Viewable;
 import net.onamap.server.constants.Pages;
@@ -25,6 +27,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 @Singleton
@@ -34,6 +40,7 @@ public class OnAMapHTTPResource {
 
     private static final Logger log = LoggerFactory.getLogger(OnAMapHTTPResource.class.getName());
 
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
     @GET
     public Response welcome(@Context HttpServletRequest request, @Context HttpServletResponse response) {
@@ -55,6 +62,22 @@ public class OnAMapHTTPResource {
             LoginActionController.prepareForLogin(request, cookieUser.getUsername());
             return Response.ok(new Viewable(Pages.LOGIN)).build();
         } else {
+
+            UserDAOImpl userDao = new UserDAOImpl();
+            List<User> users = userDao.getAllUsers();
+            List<Object> usersToDisplay = new ArrayList<>();
+            for (User user : users) {
+                String flickrPhotosetId = user.getFlickrPhotosetId();
+                if (flickrPhotosetId != null && !flickrPhotosetId.isEmpty()) {
+                    Map map = new HashMap<>();
+                    map.put("username", user.getUsername());
+                    usersToDisplay.add(map);
+                }
+            }
+
+            Map pageData = new HashMap();
+            pageData.put("users", usersToDisplay);
+            request.setAttribute("pageData", gson.toJson(pageData));
             return Response.ok(new Viewable(Pages.INDEX)).build();
         }
     }

@@ -7,8 +7,6 @@
 <onamap:head>
 
 
-  <!-- Bootstrap core CSS -->
-  <link href="/assets/libs/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
   <link href="/assets/css/profile.css" rel="stylesheet" type="text/css"/>
   <style>#content > div {
     width: 100%;
@@ -31,7 +29,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">${requestScope.USERNAME}</a>
+      <a class="navbar-brand" href="#">${USERNAME}</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -68,13 +66,14 @@
     <td id="tdcontent">
       <div id="content">
         <div id="us-map-svg"></div>
-        <div id="timeline" ng-controller="TimelineCtrl" >
+        <div id="timeline" ng-controller="TimelineCtrl">
           <div class="row">
 
             <div class="col-sm-4" ng-repeat="photo in photos">
               <div class="row" style="padding:10px;">
                 <div class="col-xs-12 text-center">
                   <img ng-src="{{photo.url_s}}" class="img-thumbnail"/>
+
                   <div>
                     <strong>{{photo.title}}</strong><span> on </span>
                     <span>{{photo.datetaken | date:'MMMM dd, yyyy'}}</span></div>
@@ -95,18 +94,18 @@
   </tbody>
 </table>
 
+<onamap:scripts>
+  <script type="text/javascript"
+          src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="/assets/js/raphael/raphael-2.1.min.js"></script>
+  <script src="/assets/js/raphael/scale.raphael-0.8.js"></script>
+  <script src="/assets/js/maps-svg/us-map-svg.js"></script>
+  <script type="text/javascript">
+    var json = <c:out value='${json}' escapeXml="false"/>;
+  </script>
+  <script src="/assets/js/profile_bootstrap.js"></script>
+</onamap:scripts>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 
-<script type="text/javascript"
-        src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script src="/assets/js/raphael/raphael-2.1.min.js"></script>
-<script src="/assets/js/raphael/scale.raphael-0.8.js"></script>
-<script src="/assets/js/maps-svg/us-map-svg.js"></script>
-<script type="text/javascript">
-  var json = <c:out value='${json}' escapeXml="false"/>;
-</script>
-<script src="/assets/libs/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-<script src="/assets/js/profile_bootstrap.js"></script>
 </body>
 </html>

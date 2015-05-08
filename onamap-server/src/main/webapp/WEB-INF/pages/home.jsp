@@ -41,7 +41,7 @@
                         </ul>
                     </c:when>
                     <c:otherwise>
-                        <a href="${DOMAIN_BASE_URL}/action/flickr/load_photosets">Load
+                        <a href="${DOMAIN_BASE_URL}/action/flickr/load_photosets" class="btn btn-default">Load
                             Photosets</a>
                     </c:otherwise>
                 </c:choose>
