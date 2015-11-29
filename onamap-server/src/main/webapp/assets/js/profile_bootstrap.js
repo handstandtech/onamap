@@ -2,7 +2,7 @@ var util = {
     getStatesCount: function () {
         var count = 0;
         if (json.world.places != undefined) {
-            var array = json.world.places['United States of America'].places;
+            var array = json.world.places['United States'].places;
             for (var stateName in array) {
                 if (stateName != "District of Columbia") {
                     count++;
@@ -25,7 +25,7 @@ var usMap = {
         if (json.world.places != undefined) {
             for (var stateAbbr in svgUS) {
                 var stateName = json.states[stateAbbr];
-                var theUs = json.world.places['United States of America'];
+                var theUs = json.world.places['United States'];
                 var place = theUs.places[stateName];
 
                 var color;
@@ -54,7 +54,7 @@ var usMap = {
             $(window).resize();
         });
         bottom.empty();
-        var theUs = json.world.places['United States of America'];
+        var theUs = json.world.places['United States'];
         var theState = theUs.places[stateName];
         var photosIds = theState.photos;
         if (photosIds != undefined) {

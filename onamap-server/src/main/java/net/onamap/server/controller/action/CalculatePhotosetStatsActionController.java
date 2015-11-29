@@ -7,15 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.onamap.server.controller.AbstractController;
-import net.onamap.server.dao.OSMPlaceDAOImpl;
+import net.onamap.server.dao.GMapsModelDAOImpl;
 import net.onamap.server.dao.PhotoDAOImpl;
 import net.onamap.server.dao.PhotosetDAOImpl;
 import net.onamap.server.dao.UserDAOImpl;
 import net.onamap.server.util.UnitedStates;
-import net.onamap.shared.model.OSMPlace;
-import net.onamap.shared.model.OSMPlace.OSMAddress;
-import net.onamap.shared.model.Photo;
-import net.onamap.shared.model.User;
+import net.onamap.shared.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +26,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
     private static PhotoDAOImpl photoDao = new PhotoDAOImpl();
     private static PhotosetDAOImpl photosetDao = new PhotosetDAOImpl();
     private static UserDAOImpl userDao = new UserDAOImpl();
-    private static OSMPlaceDAOImpl osmPlaceDAO = new OSMPlaceDAOImpl();
+    private static GMapsModelDAOImpl osmPlaceDAO = new GMapsModelDAOImpl();
 
     private static Logger log = LoggerFactory
             .getLogger(FlickrLoadPhotosetActionController.class.getName());
@@ -128,7 +125,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
             url_s = photo.getUrl_s();
             lat = photo.getLatitude();
             lng = photo.getLongitude();
-            if(photo.getDatetaken()!=null){
+            if (photo.getDatetaken() != null) {
                 this.datetaken = photo.getDatetaken().getTime();
             }
             title = photo.getTitle();
@@ -146,7 +143,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
     private void doWork(HttpServletRequest request, User subdomainUser) {
 
-        User.FlickrUserInfo flickrInfo = subdomainUser.getFlickrInfo();
+        FlickrUserInfo flickrInfo = subdomainUser.getFlickrInfo();
         String flickrPhotosetId = subdomainUser.getFlickrPhotosetId();
         log.info("Photoset: " + flickrPhotosetId);
         // Perform Analysis
@@ -159,7 +156,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         LocationGroup world = new LocationGroup();
         for (Photo photo : photos) {
             photosMap.put(photo.getId(), new PhotoLite(flickrInfo.getId(), photo));
-            OSMAddress address = photo.getAddress();
+            CityStateCountry address = photo.getCityStateCountry();
 
             if (address != null) {
                 String countryName = address.getCountry();
@@ -213,11 +210,11 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         request.setAttribute("json", jsonString);
     }
 
-    private Map<Long, OSMPlace> getPlaceMap(HashSet<Key<OSMPlace>> placeIds) {
+    private Map<Long, GMapsModel> getPlaceMap(HashSet<Key<GMapsModel>> placeIds) {
 
-        Map<Long, OSMPlace> placeMap = new HashMap<Long, OSMPlace>();
-        Map<Key<OSMPlace>, OSMPlace> places = osmPlaceDAO.getPlaces(placeIds);
-        for (Key<OSMPlace> key : places.keySet()) {
+        Map<Long, GMapsModel> placeMap = new HashMap<Long, GMapsModel>();
+        Map<Key<GMapsModel>, GMapsModel> places = osmPlaceDAO.get(placeIds);
+        for (Key<GMapsModel> key : places.keySet()) {
             placeMap.put(key.getId(), places.get(key));
         }
         return placeMap;
@@ -237,12 +234,12 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
     // }
 
     private Map<Long, List<String>> getPlaceToPhotosMap(
-            Map<String, Photo> photosMap, Map<Long, OSMPlace> placeMap) {
+            Map<String, Photo> photosMap, Map<Long, GMapsModel> placeMap) {
         Map<Long, List<String>> placeToPhotosMap = new HashMap<Long, List<String>>();
 
         for (Photo photo : photosMap.values()) {
             log.info("Stats On: " + photo.getTitle());
-            Long key = photo.getOsmPlaceId();
+            Long key = photo.getGmapsPlaceId();
             if (key != null) {
                 List<String> photosInMap = placeToPhotosMap.get(key);
                 if (photosInMap == null) {

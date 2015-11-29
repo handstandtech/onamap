@@ -2,12 +2,14 @@ package net.onamap.server.guice;
 
 import com.google.inject.Singleton;
 import com.googlecode.objectify.ObjectifyFactory;
+import com.googlecode.objectify.ObjectifyFilter;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 import net.onamap.server.controller.OnAMapHTTPResource;
 import net.onamap.server.controller.action.*;
 import net.onamap.server.filter.LoggedInFilter;
 import net.onamap.server.objectify.OfyFactory;
+import net.onamap.server.objectify.OfyService;
 import net.onamap.server.singleton.AppstatsSingletonFilter;
 import net.onamap.server.singleton.AppstatsSingletonServlet;
 import net.onamap.server.task.ReverseGeocodeTaskServlet;
@@ -29,11 +31,15 @@ public class GuiceServletModule extends JerseyServletModule {
 
     @Override
     public void configureServlets() {
+        requestStaticInjection(OfyService.class);
         requestStaticInjection(OfyFactory.class);
 
         // Model object managers
         bind(ObjectifyFactory.class).in(Singleton.class);
+        bind(ObjectifyFilter.class).in(Singleton.class);
         appstats().through(AppstatsSingletonFilter.class);
+        filter("/*").through(ObjectifyFilter.class);
+
 
         // Filters
         filter("*").through(LoggedInFilter.class);

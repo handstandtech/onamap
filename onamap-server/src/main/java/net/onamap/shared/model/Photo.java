@@ -6,7 +6,6 @@ import com.googlecode.objectify.annotation.Index;
 import com.handstandtech.flickr.shared.model.FlickrPhoto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.onamap.shared.model.OSMPlace.OSMAddress;
 
 import javax.persistence.PrePersist;
 import java.io.Serializable;
@@ -39,9 +38,9 @@ public class Photo implements Serializable {
     @Index
     private String flickrPhotosetId;
 
-    private OSMAddress address;
+    private CityStateCountry cityStateCountry;
 
-    private Long osmPlaceId;
+    private Long gmapsPlaceId;
 
     private Long flickrLastUpdatedTime;
 

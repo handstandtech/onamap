@@ -44,18 +44,6 @@ public class User implements Serializable {
 		lastLoginDate = now;
 	}
 
-    @Data
-    @NoArgsConstructor
-    @Embed
-	public static class FlickrUserInfo implements Serializable {
 
-		private static final long serialVersionUID = 1L;
-
-		private String username;
-		private String id;
-        private String nsid;
-		private String token;
-		private String tokenSecret;
-	}
 
 }

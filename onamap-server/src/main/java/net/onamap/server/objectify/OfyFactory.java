@@ -16,34 +16,35 @@ import javax.inject.Singleton;
  */
 @Singleton
 @Slf4j
-public class OfyFactory extends ObjectifyFactory {
-	/** */
-	@Inject
-	private static Injector injector;
+public class OfyFactory extends ObjectifyFactory
+{
+    /** */
+    private Injector injector;
 
-	/** Register our entity types */
-	public OfyFactory() {
-		long time = System.currentTimeMillis();
-		this.register(OSMPlace.class);
-		this.register(Photo.class);
-		this.register(User.class);
-		this.register(Photoset.class);
+    /** Register our entity types */
+    @Inject
+    public OfyFactory(Injector injector) {
+        this.injector = injector;
 
+        long time = System.currentTimeMillis();
+        this.register(GMapsModel.class);
+        this.register(Photo.class);
+        this.register(User.class);
+        this.register(Photoset.class);
+        this.register(GsonKeySerializerHack.class);
 
-		this.register(GsonKeySerializerHack.class);
+        long millis = System.currentTimeMillis() - time;
+        log.info("Registration took " + millis + " millis");
+    }
 
-		long millis = System.currentTimeMillis() - time;
-		log.info("Registration took " + millis + " millis");
-	}
+    /** Use guice to make instances instead! */
+    @Override
+    public <T> T construct(Class<T> type) {
+        return injector.getInstance(type);
+    }
 
-	/** Use guice to make instances instead! */
-	@Override
-	public <T> T construct(Class<T> type) {
-		return injector.getInstance(type);
-	}
-
-	@Override
-	public Ofy begin() {
-		return new Ofy(this);
-	}
+    @Override
+    public Ofy begin() {
+        return new Ofy(this);
+    }
 }

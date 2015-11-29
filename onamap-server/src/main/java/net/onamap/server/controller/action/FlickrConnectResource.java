@@ -12,6 +12,7 @@ import net.onamap.server.constants.Urls;
 import net.onamap.server.dao.UserDAOImpl;
 import net.onamap.server.util.RequestHelper;
 import net.onamap.server.util.SessionHelper;
+import net.onamap.shared.model.FlickrUserInfo;
 import net.onamap.shared.model.User;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
@@ -130,7 +131,7 @@ public class FlickrConnectResource extends HttpServlet {
             FlickrHelper flickr = FlickrConstants.createFlickrHelper(token, tokenSecret);
             FlickrUser flickrUser = flickr.test_login();
 
-            User.FlickrUserInfo flickrInfo = new User.FlickrUserInfo();
+            FlickrUserInfo flickrInfo = new FlickrUserInfo();
             flickrInfo.setToken(token);
             flickrInfo.setNsid(flickrUser.getNsid());
             flickrInfo.setTokenSecret(tokenSecret);

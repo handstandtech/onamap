@@ -14,6 +14,7 @@ import net.onamap.server.dao.PhotosetDAOImpl;
 import net.onamap.server.dao.UserDAOImpl;
 import net.onamap.server.task.TaskHelper;
 import net.onamap.server.util.SessionHelper;
+import net.onamap.shared.model.FlickrUserInfo;
 import net.onamap.shared.model.Photo;
 import net.onamap.shared.model.Photoset;
 import net.onamap.shared.model.User;
@@ -53,7 +54,7 @@ public class FlickrLoadPhotosetActionController extends
     @Path("/load_photosets")
     public Response loadPhotosets(@Context HttpServletRequest request, @Context HttpServletResponse response, @QueryParam("id") String flickrPhotosetId) {
         User user = SessionHelper.getCurrentUser(request);
-        User.FlickrUserInfo flickrInfo = user.getFlickrInfo();
+        FlickrUserInfo flickrInfo = user.getFlickrInfo();
         if (flickrInfo != null) {
 
             FlickrHelper flickr = FlickrConstants.createFlickrHelper(
@@ -74,7 +75,7 @@ public class FlickrLoadPhotosetActionController extends
 
         log.info("PHOTOSET: " + flickrPhotosetId);
         User user = SessionHelper.getCurrentUser(request);
-        User.FlickrUserInfo flickrInfo = user.getFlickrInfo();
+        FlickrUserInfo flickrInfo = user.getFlickrInfo();
         if (flickrInfo != null && !isNullOrEmpty(flickrPhotosetId)) {
 
             // Long photosetId = Long.parseLong(flickrPhotosetIdStr);
