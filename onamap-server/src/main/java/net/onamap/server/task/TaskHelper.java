@@ -15,7 +15,7 @@ public class TaskHelper {
 			.getName());
 
 	public static void queueReverseGeocode(String flickrPhotoId) {
-		Queue queue = QueueFactory.getDefaultQueue();
+		Queue queue = QueueFactory.getQueue("GoogleMapsReverseGeocode");
 
 		TaskOptions taskOptions = Builder.withDefaults();
 		taskOptions.taskName("Reverse-Geocode-Photo-" + flickrPhotoId + "--"

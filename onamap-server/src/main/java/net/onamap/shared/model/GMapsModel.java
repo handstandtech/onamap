@@ -30,7 +30,6 @@ public class GMapsModel implements Serializable {
 
     Double placeLng;
 
-
     //LOCALITY
     ShortAndLongName city;
 

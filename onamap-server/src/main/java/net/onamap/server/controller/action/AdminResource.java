@@ -5,6 +5,7 @@ import com.sun.jersey.api.view.Viewable;
 import net.onamap.server.constants.Pages;
 import net.onamap.server.constants.Urls;
 import net.onamap.server.controller.AbstractController;
+import net.onamap.server.dao.GMapsModelDAOImpl;
 import net.onamap.server.dao.PhotoDAOImpl;
 import net.onamap.server.dao.PhotosetDAOImpl;
 import net.onamap.server.dao.UserDAOImpl;
@@ -42,6 +43,7 @@ public class AdminResource extends AbstractController {
         new PhotosetDAOImpl().deleteAllPhotosets();
         new PhotoDAOImpl().deleteAllPhotos();
         new UserDAOImpl().deleteAllUsers();
+        new GMapsModelDAOImpl().deleteAll();
 
         return Response.seeOther(URI.create(Urls.ADMIN)).build();
     }

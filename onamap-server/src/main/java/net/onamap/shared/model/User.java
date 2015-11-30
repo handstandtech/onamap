@@ -4,7 +4,6 @@ import com.googlecode.objectify.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.PrePersist;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -35,7 +34,7 @@ public class User implements Serializable {
 	private FlickrUserInfo flickrInfo;
 
 	@SuppressWarnings("unused")
-	@PrePersist
+	@OnSave
 	private void PrePersist() {
 		Date now = new Date();
 		if (createdDate == null) {

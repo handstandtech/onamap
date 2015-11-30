@@ -22,7 +22,7 @@
 //        return ofy().save().entity(place).now().getId();
 //    }
 //
-//    public void deleteAllOSMPlaces() {
+//    public void deleteAll() {
 //        QueryKeys keys = ofy().load().type(OSMPlace.class).keys();
 //        ofy().delete().keys(keys);
 //    }

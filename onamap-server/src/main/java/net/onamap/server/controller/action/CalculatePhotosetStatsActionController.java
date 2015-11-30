@@ -151,10 +151,13 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         // Create a map of the photos
 
         int maxPhotosInState = 0;
-        List<Photo> photos = photoDao.getPhotosInFlickrPhotoset(flickrPhotosetId);
+        Photoset photoset = photosetDao.findPhotoset(flickrPhotosetId);
+
+
+        Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoset.getPhotoIds());
         Map<String, PhotoLite> photosMap = new HashMap<String, PhotoLite>();
         LocationGroup world = new LocationGroup();
-        for (Photo photo : photos) {
+        for (Photo photo : photosByIdInDB.values()) {
             photosMap.put(photo.getId(), new PhotoLite(flickrInfo.getId(), photo));
             CityStateCountry address = photo.getCityStateCountry();
 
@@ -239,7 +242,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
         for (Photo photo : photosMap.values()) {
             log.info("Stats On: " + photo.getTitle());
-            Long key = photo.getGmapsPlaceId();
+            Long key = photo.getGmapsId();
             if (key != null) {
                 List<String> photosInMap = placeToPhotosMap.get(key);
                 if (photosInMap == null) {

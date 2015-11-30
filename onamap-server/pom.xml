@@ -158,13 +158,6 @@
             <version>${objectify.version}</version>
         </dependency>
 
-        <!-- Google Maps -->
-        <dependency>
-            <groupId>com.google.maps</groupId>
-            <artifactId>google-maps-services</artifactId>
-            <version>0.1.9</version>
-        </dependency>
-
         <!-- GAE dependencies -->
         <dependency>
             <groupId>com.google.appengine</groupId>

@@ -22,12 +22,12 @@ public class GMapsModelDAOImpl {
         return ofy().save().entity(place).now().getId();
     }
 
-    public void deleteAllOSMPlaces() {
+    public void deleteAll() {
         QueryKeys keys = ofy().load().type(GMapsModel.class).keys();
         ofy().delete().keys(keys);
     }
 
-    public GMapsModel findPlace(Long id) {
+    public GMapsModel findPlace(String id) {
         return ofy().load().type(GMapsModel.class).id(id).now();
     }
 
@@ -35,4 +35,9 @@ public class GMapsModelDAOImpl {
             HashSet<Key<GMapsModel>> placeIds) {
         return ofy().load().keys(placeIds);
     }
+
+    public GMapsModel findPlaceByLatLng(double flickrLat, double flickrLng) {
+        return ofy().load().type(GMapsModel.class).filter("lat", flickrLat).filter("lng", flickrLng).first().now();
+    }
+
 }

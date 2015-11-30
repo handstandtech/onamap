@@ -2,12 +2,11 @@ package net.onamap.shared.model;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.OnSave;
 import com.handstandtech.flickr.shared.model.FlickrPhoto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.PrePersist;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -35,12 +34,9 @@ public class Photo implements Serializable {
     private String url_m;
     private String url_o;
 
-    @Index
-    private String flickrPhotosetId;
-
     private CityStateCountry cityStateCountry;
 
-    private Long gmapsPlaceId;
+    private Long gmapsId;
 
     private Long flickrLastUpdatedTime;
 
@@ -50,7 +46,7 @@ public class Photo implements Serializable {
         setFlickrPhoto(flickrPhoto);
     }
 
-    @PrePersist
+    @OnSave
     public void PrePersist() {
         this.lastUpdated = new Date();
     }

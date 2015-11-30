@@ -51,7 +51,7 @@ public class ReverseGeocodeTaskServlet {
 
             CityStateCountry cityStateCountry = getCityStateCountry(gMapsModel);
             photo.setCityStateCountry(cityStateCountry);
-            photo.setGmapsPlaceId(placeId);
+            photo.setGmapsId(placeId);
             photoDao.updatePhoto(photo);
         }
         return Response.ok().build();

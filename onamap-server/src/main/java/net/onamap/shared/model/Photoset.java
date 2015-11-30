@@ -3,12 +3,13 @@ package net.onamap.shared.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.OnSave;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.PrePersist;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -29,10 +30,12 @@ public class Photoset implements Serializable {
 
     private String description;
 
+    private List<String> photoIds;
+
     @Index
 	private Date lastUpdated;
 
-	@PrePersist
+	@OnSave
 	public void PrePersist() {
 		Date now = new Date();
 		this.lastUpdated = now;

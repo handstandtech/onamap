@@ -18,8 +18,8 @@ public class PhotosetDAOImpl {
         return ofy().save().entity(photoset).now().getName();
     }
 
-    public Photoset findPhotoset(Long id) {
-        return ofy().load().type(Photoset.class).first().now();
+    public Photoset findPhotoset(String id) {
+        return ofy().load().type(Photoset.class).id(id).now();
     }
 
     public void deleteAllPhotosets() {

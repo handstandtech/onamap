@@ -4,7 +4,6 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.inject.Singleton;
-import com.google.maps.GeoApiContext;
 import com.google.maps.onamapmodels.AddressComponent;
 import com.google.maps.onamapmodels.AddressComponentType;
 import com.google.maps.onamapmodels.GeocodingResult;
@@ -19,7 +18,9 @@ import net.onamap.shared.model.GMapsModel;
 import net.onamap.shared.model.ShortAndLongName;
 
 import javax.ws.rs.Path;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -30,12 +31,10 @@ import java.util.Map;
 public class GMaps {
 
     static String GOOGLE_MAPS_API_KEY = "AIzaSyAmkYEpXWUPxtrjGp0nOB9Buk9V2lXeLKg";
-    GeoApiContext context;
 
     private static Gson gson;
 
     public GMaps() {
-        context = new GeoApiContext().setApiKey(GOOGLE_MAPS_API_KEY);
         gson = new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapter(AddressComponentType.class,
                         new UppercaseEnumAdapter())
@@ -60,8 +59,6 @@ public class GMaps {
 
         try {
             GeocodingResult[] results = makeRestCall(lat, lng);//GeocodingApi.reverseGeocode(context, new LatLng(lat, lng)).await();
-            System.out.println(gson.toJson(results));
-
 
             if (results != null && results.length > 0) {
                 model = new GMapsModel();
@@ -72,27 +69,33 @@ public class GMaps {
                 model.setLng(lng);
                 model.setPlaceLat(result.geometry.location.lat);
                 model.setPlaceLng(result.geometry.location.lng);
-                for (AddressComponent addressComponent : result.addressComponents) {
-                    ShortAndLongName name = getGMapsName(addressComponent);
-                    for (AddressComponentType type : addressComponent.types) {
-                        if (type == AddressComponentType.LOCALITY) {
-                            model.setCity(name);
-                        } else if (type == AddressComponentType.COUNTRY) {
-                            model.setCountry(name);
-                        } else if (type == AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_1) {
-                            model.setState(name);
-                        }
-                    }
-                }
+
+                model.setCity(getShortAndLongName(result.addressComponents, CITY_COMPONENT_TYPES));
+                model.setState(getShortAndLongName(result.addressComponents, STATE_COMPONENT_TYPES));
+                model.setCountry(getShortAndLongName(result.addressComponents, COUNTRY_COMPONENT_TYPES));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println("----------------");
-        System.out.println(lat + ", " + lng + " - " + gson.toJson(model));
+        log.debug("MODEL for " + lat + ", " + lng + " - " + gson.toJson(model));
 
         return model;
+    }
+
+    private static final List<AddressComponentType> CITY_COMPONENT_TYPES = Arrays.asList(AddressComponentType.LOCALITY, AddressComponentType.SUBLOCALITY, AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_2, AddressComponentType.POLITICAL);
+    private static final List<AddressComponentType> STATE_COMPONENT_TYPES = Arrays.asList(AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_1);
+    private static final List<AddressComponentType> COUNTRY_COMPONENT_TYPES = Arrays.asList(AddressComponentType.COUNTRY);
+
+    private ShortAndLongName getShortAndLongName(AddressComponent[] addressComponents, List<AddressComponentType> toMatchComponentTypes) {
+        for (AddressComponent addressComponent : addressComponents) {
+            for (AddressComponentType addressComponentType : addressComponent.types) {
+                if (toMatchComponentTypes.contains(addressComponentType)) {
+                    return getGMapsName(addressComponent);
+                }
+            }
+        }
+        return null;
     }
 
     ShortAndLongName getGMapsName(AddressComponent addressComponent) {

@@ -9,15 +9,13 @@ import com.handstandtech.flickr.shared.model.FlickrPhotosetInfos;
 import net.onamap.server.constants.FlickrConstants;
 import net.onamap.server.constants.Urls;
 import net.onamap.server.controller.RequiresLoginAbstractController;
+import net.onamap.server.dao.GMapsModelDAOImpl;
 import net.onamap.server.dao.PhotoDAOImpl;
 import net.onamap.server.dao.PhotosetDAOImpl;
 import net.onamap.server.dao.UserDAOImpl;
 import net.onamap.server.task.TaskHelper;
 import net.onamap.server.util.SessionHelper;
-import net.onamap.shared.model.FlickrUserInfo;
-import net.onamap.shared.model.Photo;
-import net.onamap.shared.model.Photoset;
-import net.onamap.shared.model.User;
+import net.onamap.shared.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +44,7 @@ public class FlickrLoadPhotosetActionController extends
     private static UserDAOImpl userDao = new UserDAOImpl();
     private static PhotosetDAOImpl photosetDao = new PhotosetDAOImpl();
     private static PhotoDAOImpl photoDao = new PhotoDAOImpl();
+    private static GMapsModelDAOImpl gmapsDao = new GMapsModelDAOImpl();
 
     private static Logger log = LoggerFactory
             .getLogger(FlickrLoadPhotosetActionController.class.getName());
@@ -98,13 +97,6 @@ public class FlickrLoadPhotosetActionController extends
                 photoset.setDescription(photosetInfo.getDescription().get_content());
                 photoset.setCount(photosetInfo.getPhotos());
             }
-            photoset.setUserId(user.getId());
-            photosetDao.updatePhotoset(photoset);
-            user.setFlickrPhotosetId(flickrPhotosetId);
-
-            Long userId = userDao.updateUser(user);
-            user = userDao.findUser(userId);
-            SessionHelper.setCurrentUser(user, request, response);
 
             List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
 
@@ -113,6 +105,15 @@ public class FlickrLoadPhotosetActionController extends
                 photoIds.add(flickrPhoto.getId());
             }
 
+            photoset.setUserId(user.getId());
+            photoset.setPhotoIds(photoIds);
+            photosetDao.updatePhotoset(photoset);
+
+            user.setFlickrPhotosetId(flickrPhotosetId);
+            Long userId = userDao.updateUser(user);
+            user = userDao.findUser(userId);
+            SessionHelper.setCurrentUser(user, request, response);
+
             Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoIds);
             List<Photo> photosToUpdate = new ArrayList<Photo>();
             for (FlickrPhoto flickrPhoto : allFlickrPhotosInPhotoset) {
@@ -120,10 +121,11 @@ public class FlickrLoadPhotosetActionController extends
 
                 // Get the photo out of the database
                 Photo photoFromLocalDB = photosByIdInDB.get(flickrPhotoId);
+
+
                 if (photoFromLocalDB == null) {
                     //Not in DB
                     photoFromLocalDB = new Photo(flickrPhoto);
-                    photoFromLocalDB.setFlickrPhotosetId(flickrPhotosetId);
                     toReverseGeocode.add(flickrPhotoId);
                 } else {
                     //In DB, but outdated.
@@ -133,7 +135,16 @@ public class FlickrLoadPhotosetActionController extends
                     boolean haveUpToDateVersion = localDBLastUpdateDate != null && flickrPhoto.getLastupdate() < localDBLastUpdateDate.getTime();
                     if (haveUpToDateVersion == false) {
                         photoFromLocalDB.setFlickrPhoto(flickrPhoto);
-                        photoFromLocalDB.setFlickrPhotosetId(flickrPhotosetId);
+
+
+                        double flickrLat = flickrPhoto.getLatitude();
+                        double flickrLng = flickrPhoto.getLongitude();
+                        GMapsModel gMapsModel = gmapsDao.findPlaceByLatLng(flickrLat, flickrLng);
+                        if (gMapsModel != null) {
+                            photoFromLocalDB.setGmapsId(gMapsModel.getId());
+                        }
+
+
                         toReverseGeocode.add(flickrPhotoId);
                     }
                 }
@@ -144,7 +155,6 @@ public class FlickrLoadPhotosetActionController extends
             request.setAttribute("photos", allFlickrPhotosInPhotoset);
 
             for (String photoId : toReverseGeocode) {
-                // TODO Task to Reverse Geocode
                 TaskHelper.queueReverseGeocode(photoId);
             }
         }
