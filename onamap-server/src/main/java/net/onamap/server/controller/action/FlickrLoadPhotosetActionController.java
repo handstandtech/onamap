@@ -15,7 +15,10 @@ import net.onamap.server.dao.PhotosetDAOImpl;
 import net.onamap.server.dao.UserDAOImpl;
 import net.onamap.server.task.TaskHelper;
 import net.onamap.server.util.SessionHelper;
-import net.onamap.shared.model.*;
+import net.onamap.shared.model.FlickrUserInfo;
+import net.onamap.shared.model.Photo;
+import net.onamap.shared.model.Photoset;
+import net.onamap.shared.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,32 +125,24 @@ public class FlickrLoadPhotosetActionController extends
                 // Get the photo out of the database
                 Photo photoFromLocalDB = photosByIdInDB.get(flickrPhotoId);
 
+                boolean photoInDBWasNull = (photoFromLocalDB == null);
+                if (photoFromLocalDB == null || photoFromLocalDB.getCityStateCountry() == null) {
+                    //Add to reverse geocode
+                    toReverseGeocode.add(flickrPhotoId);
+                }
 
                 if (photoFromLocalDB == null) {
                     //Not in DB
                     photoFromLocalDB = new Photo(flickrPhoto);
-                    toReverseGeocode.add(flickrPhotoId);
                 } else {
-                    //In DB, but outdated.
-                    // If it's been updated more recently..
-//                    boolean coordsChanged = flickrPhoto.getLatitude() != photoFromLocalDB.getLatitude() || flickrPhoto.getLongitude() != photoFromLocalDB.getLongitude();
                     Date localDBLastUpdateDate = photoFromLocalDB.getLastUpdated();
                     boolean haveUpToDateVersion = localDBLastUpdateDate != null && flickrPhoto.getLastupdate() < localDBLastUpdateDate.getTime();
-                    if (haveUpToDateVersion == false) {
+                    if (!haveUpToDateVersion) {
+                        //In DB, but outdated.
                         photoFromLocalDB.setFlickrPhoto(flickrPhoto);
-
-
-                        double flickrLat = flickrPhoto.getLatitude();
-                        double flickrLng = flickrPhoto.getLongitude();
-                        GMapsModel gMapsModel = gmapsDao.findPlaceByLatLng(flickrLat, flickrLng);
-                        if (gMapsModel != null) {
-                            photoFromLocalDB.setGmapsId(gMapsModel.getId());
-                        }
-
-
-                        toReverseGeocode.add(flickrPhotoId);
                     }
                 }
+
                 photosToUpdate.add(photoFromLocalDB);
             }
 

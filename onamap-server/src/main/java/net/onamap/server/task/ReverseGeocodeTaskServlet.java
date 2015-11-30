@@ -33,17 +33,23 @@ public class ReverseGeocodeTaskServlet {
     private static final long serialVersionUID = 1L;
 
     private static final GMaps gmaps = new GMaps();
+    private static GMapsModelDAOImpl gmapsDao = new GMapsModelDAOImpl();
 
     @POST
     @Path("/reverse_geocode")
     public Response reverseGeocode(@Context HttpServletRequest request, @Context HttpServletResponse response, @FormParam(PHOTO_ID_PARAM) String photoIdStr) {
         Photo photo = photoDao.findPhotoByFlickrId(photoIdStr);
 
-        Double lat = photo.getLatitude();
-        Double lon = photo.getLongitude();
+        double lat = photo.getLatitude();
+        double lon = photo.getLongitude();
         log.debug("LatLng: " + lat + "," + lon);
 
-        GMapsModel gMapsModel = gmaps.getGMapsModel(lat, lon);
+
+        GMapsModel gMapsModel = gmapsDao.findPlaceByLatLng(lat, lon);
+        if (gMapsModel == null) {
+            gMapsModel = gmaps.getGMapsModel(lat, lon);
+        }
+
 
         if (gMapsModel != null) {
             GMapsModelDAOImpl mapsModelDAO = new GMapsModelDAOImpl();
