@@ -67,6 +67,7 @@
       <div id="content">
         <div id="us-map-svg"></div>
         <div id="timeline" ng-controller="TimelineCtrl">
+          Photo Count: {{photos.length}}
           <div class="row">
 
             <div class="col-sm-4" ng-repeat="photo in photos">

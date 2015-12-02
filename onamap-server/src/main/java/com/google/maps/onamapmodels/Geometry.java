@@ -3,10 +3,11 @@
 
 package com.google.maps.onamapmodels;
 
-public class Geometry {
-    //    public com.google.maps.model.Bounds bounds;
-    public LatLng location;
-//    public com.google.maps.model.LocationType locationType;
-//    public com.google.maps.model.Bounds viewport;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+public class Geometry {
+    public LatLng location;
 }

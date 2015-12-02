@@ -7,8 +7,7 @@ import net.onamap.shared.model.GMapsModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 import static net.onamap.server.objectify.OfyService.ofy;
 
@@ -16,7 +15,6 @@ import static net.onamap.server.objectify.OfyService.ofy;
 public class GMapsModelDAOImpl {
 
     private static Logger log = LoggerFactory.getLogger(GMapsModelDAOImpl.class);
-
 
     public Long update(GMapsModel place) {
         return ofy().save().entity(place).now().getId();
@@ -40,4 +38,16 @@ public class GMapsModelDAOImpl {
         return ofy().load().type(GMapsModel.class).filter("lat", flickrLat).filter("lng", flickrLng).first().now();
     }
 
+    public List<GMapsModel> getAll() {
+        return ofy().load().type(GMapsModel.class).list();
+    }
+
+    public Map<Long, GMapsModel> getByIds(Collection<Long> ids) {
+        Map<Long, GMapsModel> toReturn = new HashMap<>();
+        Set<Map.Entry<Long, GMapsModel>> map = ofy().load().type(GMapsModel.class).ids(ids).entrySet();
+        for (Map.Entry<Long, GMapsModel> entry : map) {
+            toReturn.put(entry.getKey(), entry.getValue());
+        }
+        return toReturn;
+    }
 }

@@ -65,9 +65,9 @@ public class ReverseGeocodeTaskServlet {
 
     private CityStateCountry getCityStateCountry(GMapsModel gMapsModel) {
         CityStateCountry csc = new CityStateCountry();
-        csc.setCity(gMapsModel.getCity().getLongName());
-        csc.setState(gMapsModel.getState().getLongName());
-        csc.setCountry(gMapsModel.getCountry().getLongName());
+//        csc.setCity(gMapsModel.getCity().getLongName());
+//        csc.setState(gMapsModel.getState().getLongName());
+//        csc.setCountry(gMapsModel.getCountry().getLongName());
         return csc;
     }
 

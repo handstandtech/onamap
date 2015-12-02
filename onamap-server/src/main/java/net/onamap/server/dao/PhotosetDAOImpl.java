@@ -6,6 +6,8 @@ import net.onamap.shared.model.Photoset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import static net.onamap.server.objectify.OfyService.ofy;
 
 @NoArgsConstructor
@@ -35,4 +37,7 @@ public class PhotosetDAOImpl {
         return ofy().load().type(Photoset.class).filter("flickrPhotosetId", flickrPhotosetId).first().now();
     }
 
+    public List<Photoset> getAll() {
+            return ofy().load().type(Photoset.class).list();
+    }
 }

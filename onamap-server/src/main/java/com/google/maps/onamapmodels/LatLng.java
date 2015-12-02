@@ -3,8 +3,12 @@
 
 package com.google.maps.onamapmodels;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class LatLng {
     public double lat;
     public double lng;
-
 }

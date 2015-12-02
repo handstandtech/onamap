@@ -1,6 +1,10 @@
 package net.onamap.shared.model;
 
-import com.googlecode.objectify.annotation.*;
+import com.google.maps.onamapmodels.GeocodingResult;
+import com.googlecode.objectify.annotation.Cache;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,34 +22,16 @@ public class GMapsModel implements Serializable {
     Long id;
 
     @Index
-    String placeId;
-
-    @Index
     Double lat;
 
     @Index
     Double lng;
 
-    Double placeLat;
-
-    Double placeLng;
-
-    //LOCALITY
-    ShortAndLongName city;
-
-    //COUNTRY
-    @Index
-    ShortAndLongName country;
-
-    //ADMINISTRATIVE_AREA_LEVEL_1
-    @Index
-    ShortAndLongName state;
-
-    String formattedAddress;
+    GeocodingResult geocodingResult;
 
     @Override
     public int hashCode() {
-        return placeId.hashCode();
+        return id.hashCode();
     }
 
 }

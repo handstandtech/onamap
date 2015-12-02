@@ -13,4 +13,5 @@ public class Pages {
 	public static final String ABOUT = PREFIX + "about.jsp";
 	public static final String TERMS = PREFIX + "terms.jsp";
 	public static final String PRIVACY = PREFIX + "privacy.jsp";
+    public static final String ADMIN_MODELS = PREFIX + "admin_models.jsp";;
 }

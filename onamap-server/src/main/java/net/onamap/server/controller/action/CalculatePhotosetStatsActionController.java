@@ -2,6 +2,8 @@ package net.onamap.server.controller.action;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.maps.onamapmodels.AddressComponent;
+import com.google.maps.onamapmodels.AddressComponentType;
 import com.googlecode.objectify.Key;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,39 +32,6 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
     private static Logger log = LoggerFactory
             .getLogger(FlickrLoadPhotosetActionController.class.getName());
-
-    // var world = {
-    // photos : [ 1, 2, 3, 4 ],
-    // places : {
-    // "US" : {
-    // photos : [ 1, 2, 3, 4 ],
-    // places : {
-    // photos : [ 1, 2, 3, 4 ],
-    // "Virginia" : {
-    // places : {
-    // "Arlington" : [ 1, 2, 3, 4, 5 ]
-    // }
-    // },
-    // "North Carolina" : {
-    // photos : [ 1, 2, 3, 4 ],
-    // places : {
-    // "Durham" : [ 1, 2, 3, 4, 5 ]
-    // }
-    // },
-    // "South Carolina" : {
-    // photos : [ 1, 2, 3, 4, 5 ],
-    // places : {
-    // "Greenville" : {
-    // photos : [ 1, 2, 3, 4, 5 ],
-    // places : undefined
-    // },
-    // "Charleston" : [ 1, 2 ]
-    // }
-    // }
-    // }
-    // }
-    // }
-    // };
 
     @Data
     @NoArgsConstructor
@@ -119,8 +88,9 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         private Double lng;
         private String link;
         private Long datetaken;
+        private Long placeId;
 
-        public PhotoLite(String flickrId, Photo photo) {
+        public PhotoLite(String flickrId, Photo photo, Long placeId) {
             url_sq = photo.getUrl_sq();
             url_s = photo.getUrl_s();
             lat = photo.getLatitude();
@@ -130,6 +100,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
             }
             title = photo.getTitle();
             link = "https://www.flickr.com/photos/" + flickrId + "/" + photo.getId();
+            this.placeId = placeId;
         }
     }
 
@@ -155,11 +126,30 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
 
         Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoset.getPhotoIds());
+
+        HashSet<Long> placeIds = new HashSet<>();
+        for (Photo photo : photosByIdInDB.values()) {
+            Long placeId = photo.getGmapsId();
+            if (placeId != null) {
+                placeIds.add(placeId);
+            }
+        }
+
+        Map<Long, GMapsModel> gMapsModelMap = new GMapsModelDAOImpl().getByIds(placeIds);
+
+
         Map<String, PhotoLite> photosMap = new HashMap<String, PhotoLite>();
         LocationGroup world = new LocationGroup();
         for (Photo photo : photosByIdInDB.values()) {
-            photosMap.put(photo.getId(), new PhotoLite(flickrInfo.getId(), photo));
-            CityStateCountry address = photo.getCityStateCountry();
+            Long placeId = photo.getGmapsId();
+            photosMap.put(photo.getId(), new PhotoLite(flickrInfo.getId(), photo, placeId));
+
+            CityStateCountry address = null;
+
+            GMapsModel gMapsModel = gMapsModelMap.get(placeId);
+            if (gMapsModel != null) {
+                address = getCityStateCountry(gMapsModel);
+            }
 
             if (address != null) {
                 String countryName = address.getCountry();
@@ -170,7 +160,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
                 boolean hasState = !isNullOrEmpty(stateName);
                 boolean hasCity = !isNullOrEmpty(cityName);
 
-                world.addPhoto(photo);
+//                world.addPhoto(photo);
                 if (hasCountry) {
                     LocationGroup country = world.getPlace(countryName);
                     country.addPhoto(photo);
@@ -195,22 +185,67 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         }
 
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
         Map json = new HashMap();
         json.put("states", UnitedStates.getMap());
-        gson.toJson(UnitedStates.getMap());
+//        gson.toJson(UnitedStates.getMap());
         json.put("photosMap", photosMap);
-        gson.toJson(photosMap);
+//        gson.toJson(photosMap);
         json.put("maxPhotosInState", maxPhotosInState);
-        gson.toJson(maxPhotosInState);
+//        gson.toJson(maxPhotosInState);
         json.put("world", world);
-        gson.toJson(world.getPhotos());
-        gson.toJson(world.getPlaces());
+//        gson.toJson(world.getPhotos());
+//        gson.toJson(world.getPlaces());
 
         String jsonString = gson.toJson(json);
 
         request.setAttribute("json", jsonString);
+    }
+
+    private CityStateCountry getCityStateCountry(GMapsModel gMapsModel) {
+        CityStateCountry cityStateCountry = new CityStateCountry();
+
+        ShortAndLongName city = getShortAndLongName(gMapsModel.getGeocodingResult().addressComponents, CITY_COMPONENT_TYPES);
+        ShortAndLongName state = getShortAndLongName(gMapsModel.getGeocodingResult().addressComponents, STATE_COMPONENT_TYPES);
+        ShortAndLongName country = getShortAndLongName(gMapsModel.getGeocodingResult().addressComponents, COUNTRY_COMPONENT_TYPES);
+
+        if (city != null) {
+            cityStateCountry.setCity(city.getLongName());
+        }
+        if (state != null) {
+            cityStateCountry.setState(state.getLongName());
+        }
+        if (country != null) {
+            cityStateCountry.setCountry(country.getLongName());
+        }
+
+        return cityStateCountry;
+    }
+
+
+    private static final List<AddressComponentType> CITY_COMPONENT_TYPES = Arrays.asList(AddressComponentType.LOCALITY, AddressComponentType.SUBLOCALITY, AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_2, AddressComponentType.POLITICAL);
+    private static final List<AddressComponentType> STATE_COMPONENT_TYPES = Arrays.asList(AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_1);
+    private static final List<AddressComponentType> COUNTRY_COMPONENT_TYPES = Arrays.asList(AddressComponentType.COUNTRY);
+
+    private ShortAndLongName getShortAndLongName(List<AddressComponent> addressComponents, List<AddressComponentType> toMatchComponentTypes) {
+        for (AddressComponent addressComponent : addressComponents) {
+            for (AddressComponentType addressComponentType : addressComponent.types) {
+                if (toMatchComponentTypes.contains(addressComponentType)) {
+                    return getGMapsName(addressComponent);
+                }
+            }
+        }
+        return null;
+    }
+
+    ShortAndLongName getGMapsName(AddressComponent addressComponent) {
+        ShortAndLongName name = new ShortAndLongName();
+
+        name.setShortName(addressComponent.shortName);
+        name.setLongName(addressComponent.longName);
+
+        return name;
     }
 
     private Map<Long, GMapsModel> getPlaceMap(HashSet<Key<GMapsModel>> placeIds) {

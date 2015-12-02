@@ -48,4 +48,8 @@ public class PhotoDAOImpl {
     public void updatePhotos(List<Photo> photosToUpdate) {
         ofy().save().entities(photosToUpdate);
     }
+
+    public List<Photo> getAll() {
+        return ofy().load().type(Photo.class).list();
+    }
 }

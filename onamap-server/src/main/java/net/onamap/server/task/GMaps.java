@@ -4,7 +4,6 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.inject.Singleton;
-import com.google.maps.onamapmodels.AddressComponent;
 import com.google.maps.onamapmodels.AddressComponentType;
 import com.google.maps.onamapmodels.GeocodingResult;
 import com.handstandtech.restclient.server.RESTClient;
@@ -15,12 +14,9 @@ import com.handstandtech.restclient.shared.model.RequestMethod;
 import com.handstandtech.restclient.shared.util.RESTURLUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.onamap.shared.model.GMapsModel;
-import net.onamap.shared.model.ShortAndLongName;
 
 import javax.ws.rs.Path;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -58,21 +54,14 @@ public class GMaps {
         GMapsModel model = null;
 
         try {
-            GeocodingResult[] results = makeRestCall(lat, lng);//GeocodingApi.reverseGeocode(context, new LatLng(lat, lng)).await();
+            GeocodingResult[] results = makeRestCall(lat, lng);
 
             if (results != null && results.length > 0) {
                 model = new GMapsModel();
                 GeocodingResult result = results[0];
-                model.setPlaceId(result.placeId);
-                model.setFormattedAddress(result.formattedAddress);
+                model.setGeocodingResult(result);
                 model.setLat(lat);
                 model.setLng(lng);
-                model.setPlaceLat(result.geometry.location.lat);
-                model.setPlaceLng(result.geometry.location.lng);
-
-                model.setCity(getShortAndLongName(result.addressComponents, CITY_COMPONENT_TYPES));
-                model.setState(getShortAndLongName(result.addressComponents, STATE_COMPONENT_TYPES));
-                model.setCountry(getShortAndLongName(result.addressComponents, COUNTRY_COMPONENT_TYPES));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,30 +70,6 @@ public class GMaps {
         log.debug("MODEL for " + lat + ", " + lng + " - " + gson.toJson(model));
 
         return model;
-    }
-
-    private static final List<AddressComponentType> CITY_COMPONENT_TYPES = Arrays.asList(AddressComponentType.LOCALITY, AddressComponentType.SUBLOCALITY, AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_2, AddressComponentType.POLITICAL);
-    private static final List<AddressComponentType> STATE_COMPONENT_TYPES = Arrays.asList(AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_1);
-    private static final List<AddressComponentType> COUNTRY_COMPONENT_TYPES = Arrays.asList(AddressComponentType.COUNTRY);
-
-    private ShortAndLongName getShortAndLongName(AddressComponent[] addressComponents, List<AddressComponentType> toMatchComponentTypes) {
-        for (AddressComponent addressComponent : addressComponents) {
-            for (AddressComponentType addressComponentType : addressComponent.types) {
-                if (toMatchComponentTypes.contains(addressComponentType)) {
-                    return getGMapsName(addressComponent);
-                }
-            }
-        }
-        return null;
-    }
-
-    ShortAndLongName getGMapsName(AddressComponent addressComponent) {
-        ShortAndLongName name = new ShortAndLongName();
-
-        name.setShortName(addressComponent.shortName);
-        name.setLongName(addressComponent.longName);
-
-        return name;
     }
 
     //----------
