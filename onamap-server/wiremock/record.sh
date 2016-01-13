@@ -1,0 +1,1 @@
+ java -jar wiremock-standalone-2.0.8-beta.jar --proxy-all="https://maps.googleapis.com" --record-mappings --verbose > wiremock.log

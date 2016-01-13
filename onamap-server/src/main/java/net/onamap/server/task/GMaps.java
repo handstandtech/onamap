@@ -82,8 +82,11 @@ public class GMaps {
 //        RESTClient client = new RESTClientAppEngineURLFetchImpl();
         RESTClient client = new RESTClientJavaNetImpl();
 
+        String baseUrl = "https://maps.googleapis.com";
+//        baseUrl = "http://localhost:9090";
+
         String reverseGeocodeUrl = RESTURLUtil.createFullUrl(
-                "https://maps.googleapis.com/maps/api/geocode/json", params);
+                baseUrl + "/maps/api/geocode/json", params);
 
         RESTRequest restRequest = new RESTRequest(RequestMethod.GET, reverseGeocodeUrl);
         log.info("REST REQUEST: \n" + restRequest + "");

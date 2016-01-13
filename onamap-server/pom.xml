@@ -53,7 +53,7 @@
     </developers>
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/handstandtech/Licert/issues</url>
+        <url>https://github.com/handstandtech/onamap/issues</url>
     </issueManagement>
 
     <properties>
@@ -63,7 +63,7 @@
 
         <!-- Dependencies versions -->
         <aopalliance.version>1.0</aopalliance.version>
-        <gae.version>1.9.28</gae.version>
+        <gae.version>1.9.30</gae.version>
         <guice.version>3.0</guice.version>
         <gson.version>2.3</gson.version>
         <junit.version>4.11</junit.version>
@@ -178,11 +178,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>com.handstandtech.facebook</groupId>
             <artifactId>server</artifactId>
             <version>1.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency-->
 
         <!-- Guice -->
         <dependency>

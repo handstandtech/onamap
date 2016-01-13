@@ -1,0 +1,1 @@
+SELECT * FROM Photo WHERE __key__ = KEY('Photo', '15943607557')
