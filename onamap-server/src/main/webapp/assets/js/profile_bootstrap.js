@@ -275,16 +275,30 @@ appControllers.controller('TimelineCtrl', ['$scope', '$rootScope', '$http',
             return 0;
         };
 
+        $scope.chunk = function (arr, size) {
+            var newArr = [];
+            for (var i = 0; i < arr.length; i += size) {
+                newArr.push(arr.slice(i, i + size));
+            }
+            return newArr;
+        }
+
         $scope.sort = function (sortType) {
             if (sortType == 'date') {
                 photos.sort(sortByDate);
             } else if (sortType == 'date') {
                 photos.sort(sortByDate);
             }
+
+
             $scope.photos = photos;
+
+            $scope.rows = $scope.chunk(photos, 3);
         }
 
         $scope.sort('date');
+
+        $scope.world = {"me": "you"};
 
     }
 ]);
