@@ -47,9 +47,9 @@ public class ReverseGeocodeTaskServlet {
 
         GMapsModel gMapsModel = gmapsDao.findPlaceByLatLng(lat, lon);
         if (gMapsModel == null) {
+            log.debug("Calling Google Maps to Reverse Geocode.");
             gMapsModel = gmaps.getGMapsModel(lat, lon);
         }
-
 
         if (gMapsModel != null) {
             GMapsModelDAOImpl mapsModelDAO = new GMapsModelDAOImpl();

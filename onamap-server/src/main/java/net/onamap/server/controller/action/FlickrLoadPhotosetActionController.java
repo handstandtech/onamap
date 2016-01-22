@@ -1,5 +1,7 @@
 package net.onamap.server.controller.action;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.inject.Singleton;
 import com.handstandtech.flickr.server.FlickrHelper;
 import com.handstandtech.flickr.shared.model.FlickrPhoto;
@@ -49,8 +51,8 @@ public class FlickrLoadPhotosetActionController extends
     private static PhotoDAOImpl photoDao = new PhotoDAOImpl();
     private static GMapsModelDAOImpl gmapsDao = new GMapsModelDAOImpl();
 
-    private static Logger log = LoggerFactory
-            .getLogger(FlickrLoadPhotosetActionController.class.getName());
+    private static Logger log = LoggerFactory.getLogger(FlickrLoadPhotosetActionController.class);
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
     @GET
     @Path("/load_photosets")
@@ -78,84 +80,95 @@ public class FlickrLoadPhotosetActionController extends
         log.info("PHOTOSET: " + flickrPhotosetId);
         User user = SessionHelper.getCurrentUser(request);
         FlickrUserInfo flickrInfo = user.getFlickrInfo();
-        if (flickrInfo != null && !isNullOrEmpty(flickrPhotosetId)) {
-
-            // Long photosetId = Long.parseLong(flickrPhotosetIdStr);
-            // have flickr info, continue!
-            FlickrHelper flickr = FlickrConstants.createFlickrHelper(
-                    flickrInfo.getToken(), flickrInfo.getTokenSecret());
-
-
-            FlickrPhotosetInfo photosetInfo = getPhotosetInfo(request, flickrPhotosetId);
-
-            // Create our photoset and add to db
-            Photoset photoset = photosetDao.findPhotosetByFlickrId(flickrPhotosetId);
-            if (photoset == null) {
-                photoset = new Photoset();
-                photoset.setId(flickrPhotosetId);
-            }
-
-            if (photosetInfo != null) {
-                photoset.setTitle(photosetInfo.getTitle().get_content());
-                photoset.setDescription(photosetInfo.getDescription().get_content());
-                photoset.setCount(photosetInfo.getPhotos());
-            }
-
-            List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
-
-            List<String> photoIds = new ArrayList<String>();
-            for (FlickrPhoto flickrPhoto : allFlickrPhotosInPhotoset) {
-                photoIds.add(flickrPhoto.getId());
-            }
-
-            photoset.setUserId(user.getId());
-            photoset.setPhotoIds(photoIds);
-            photosetDao.updatePhotoset(photoset);
-
-            user.setFlickrPhotosetId(flickrPhotosetId);
-            Long userId = userDao.updateUser(user);
-            user = userDao.findUser(userId);
-            SessionHelper.setCurrentUser(user, request, response);
-
-            Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoIds);
-            List<Photo> photosToUpdate = new ArrayList<Photo>();
-            for (FlickrPhoto flickrPhoto : allFlickrPhotosInPhotoset) {
-                String flickrPhotoId = flickrPhoto.getId();
-
-                // Get the photo out of the database
-                Photo photoFromLocalDB = photosByIdInDB.get(flickrPhotoId);
-
-                boolean photoInDBWasNull = (photoFromLocalDB == null);
-                if (photoFromLocalDB == null || photoFromLocalDB.getCityStateCountry() == null) {
-                    //Add to reverse geocode
-                    toReverseGeocode.add(flickrPhotoId);
-                }
-
-                if (photoFromLocalDB == null) {
-                    //Not in DB
-                    photoFromLocalDB = new Photo(flickrPhoto);
-                } else {
-                    Date localDBLastUpdateDate = photoFromLocalDB.getLastUpdated();
-                    boolean haveUpToDateVersion = localDBLastUpdateDate != null && flickrPhoto.getLastupdate() < localDBLastUpdateDate.getTime();
-                    if (!haveUpToDateVersion) {
-                        //In DB, but outdated.
-                        photoFromLocalDB.setFlickrPhoto(flickrPhoto);
-                    }
-                }
-
-                photosToUpdate.add(photoFromLocalDB);
-            }
-
-            photoDao.updatePhotos(photosToUpdate);
-            request.setAttribute("photos", allFlickrPhotosInPhotoset);
-
-            for (String photoId : toReverseGeocode) {
-                TaskHelper.queueReverseGeocode(photoId);
-            }
+        if (flickrInfo == null || isNullOrEmpty(flickrPhotosetId)) {
+            return Response.temporaryRedirect(URI.create(Urls.HOME)).build();
         }
 
-        return Response.temporaryRedirect(URI.create(Urls.HOME)).
-                build();
+        // Long photosetId = Long.parseLong(flickrPhotosetIdStr);
+        // have flickr info, continue!
+        FlickrHelper flickr = FlickrConstants.createFlickrHelper(
+                flickrInfo.getToken(), flickrInfo.getTokenSecret());
+
+        FlickrPhotosetInfo photosetInfo = getPhotosetInfo(request, flickrPhotosetId);
+
+        // Create our photoset and add to db
+        Photoset photoset = photosetDao.findPhotosetByFlickrId(flickrPhotosetId);
+        if (photoset == null) {
+            photoset = new Photoset();
+            photoset.setId(flickrPhotosetId);
+        }
+
+        if (photosetInfo != null) {
+            photoset.setTitle(photosetInfo.getTitle().get_content());
+            photoset.setDescription(photosetInfo.getDescription().get_content());
+            photoset.setCount(photosetInfo.getPhotos());
+        }
+
+        List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
+
+        List<String> photoIds = getPhotoIdsFromPhotoset(allFlickrPhotosInPhotoset);
+
+        photoset.setUserId(user.getId());
+        photoset.setPhotoIds(photoIds);
+        photosetDao.updatePhotoset(photoset);
+
+        user.setFlickrPhotosetId(flickrPhotosetId);
+        Long userId = userDao.updateUser(user);
+        user = userDao.findUser(userId);
+        SessionHelper.setCurrentUser(user, request, response);
+
+        Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoIds);
+        List<Photo> photosToUpdate = new ArrayList<Photo>();
+        for (FlickrPhoto remoteFlickrPhoto : allFlickrPhotosInPhotoset) {
+            String flickrPhotoId = remoteFlickrPhoto.getId();
+
+            // Get the photo out of the database
+            Photo photoFromLocalDB = photosByIdInDB.get(flickrPhotoId);
+
+            final boolean photoInDBWasNull = (photoFromLocalDB == null);
+            final boolean photoLocationWasNull = (photoFromLocalDB.getCityStateCountry() == null);
+            if (photoInDBWasNull || photoLocationWasNull) {
+                //Add to reverse geocode
+                toReverseGeocode.add(flickrPhotoId);
+            }
+
+            if (photoInDBWasNull) {
+                //Not in DB
+                photoFromLocalDB = new Photo(remoteFlickrPhoto);
+            } else {
+                Date localDBLastUpdateDate = photoFromLocalDB.getLastUpdated();
+                final long localDBLastUpdateTime = localDBLastUpdateDate.getTime();
+                final long flickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * 1000;
+                log.info("flickrPhotoId" + flickrPhotoId + " | localDBLastUpdateTime: " + localDBLastUpdateTime + " | flickrPhotoLastUpdateTime: " + flickrPhotoLastUpdateTime);
+
+                final boolean isOutDated = (flickrPhotoLastUpdateTime < localDBLastUpdateTime);
+                log.info("isOutDated: " + isOutDated);
+                if (!isOutDated) {
+                    //In DB, but outdated.
+                    photoFromLocalDB.setFlickrPhoto(remoteFlickrPhoto);
+                    log.info("remoteFlickrPhoto: " + gson.toJson(remoteFlickrPhoto));
+                }
+            }
+
+            photosToUpdate.add(photoFromLocalDB);
+        }
+
+        photoDao.updatePhotos(photosToUpdate);
+        request.setAttribute("photos", allFlickrPhotosInPhotoset);
+
+        for (String photoId : toReverseGeocode) {
+            TaskHelper.queueReverseGeocode(photoId);
+        }
+
+        return Response.temporaryRedirect(URI.create(Urls.HOME)).build();
+    }
+
+    private List<String> getPhotoIdsFromPhotoset(final List<FlickrPhoto> allFlickrPhotosInPhotoset) {
+        final List<String> photoIds = new ArrayList<String>();
+        for (final FlickrPhoto flickrPhoto : allFlickrPhotosInPhotoset) {
+            photoIds.add(flickrPhoto.getId());
+        }
+        return photoIds;
     }
 
     private List<FlickrPhoto> getAllFlickrPhotosInPhotoset(FlickrHelper flickr, FlickrPhotosetInfo photosetInfo) {
@@ -178,7 +191,7 @@ public class FlickrLoadPhotosetActionController extends
     private List<FlickrPhoto> getPhotosInPage(FlickrHelper flickr, String flickrPhotosetId, Integer page, Integer per_page) {
         FlickrPhotoset flickrPhotoset = flickr
                 .photosets_getPhotos(flickrPhotosetId, page, per_page);
-        System.out.println("photos: " + flickrPhotoset);
+        log.info("photos: " + gson.toJson(flickrPhotoset));
         List<FlickrPhoto> flickrPhotos = flickrPhotoset.getPhotos();
         return flickrPhotos;
     }
