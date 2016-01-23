@@ -6,7 +6,6 @@
 <html ng-app="myApp">
 <onamap:head>
 
-
   <link href="/assets/css/profile.css" rel="stylesheet" type="text/css"/>
   <style>#content > div {
     width: 100%;
@@ -112,7 +111,7 @@
   <script src="/assets/js/maps-svg/us-map-svg.js"></script>
   <script type="text/javascript">
     var json = <c:out value='${json}' escapeXml="false"/>;
-    <%-- onamap:mock></onamap:mock --%>
+    <onamap:mock></onamap:mock >
   </script>
   <script src="/assets/js/profile_bootstrap.js"></script>
 </onamap:scripts>

@@ -175,7 +175,6 @@ var gmap = {
     init: function () {
         var width = $("#content").width();
         var height = $("#content").height();
-        // $("#google-map").css({width: width, height: height});
         var myLatlng = new google.maps.LatLng(37.615162, -76.292157);
 
         var myOptions = {
@@ -195,19 +194,34 @@ var gmap = {
     reset: function () {
         google.maps.event.trigger(gmap.map, 'resize');
     },
+    infowindow: new google.maps.InfoWindow({content: ""}),
+    formatTime: function (time) {
+        var d = new Date(time),
+            month = d.getMonth(),
+            day = d.getDate() ,
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        return monthNames[month] + " " + day + ", " + year;
+    },
     image: new google.maps.MarkerImage(
-        'http://labs.google.com/ridefinder/images/mm_20_red.png'),
+        '/assets/img/mm_20_red.png'),
     shadow: new google.maps.MarkerImage(
-        'http://labs.google.com/ridefinder/images/mm_20_shadow.png'),
+        '/assets/img/mm_20_shadow.png'),
     addPhoto: function (photo) {
         var lat = photo.lat, lng = photo.lng, title = photo.title, imgsrc = photo.url_s, link = photo.link;
         var latlng = new google.maps.LatLng(lat, lng);
-        var contentString = '<div id="content"><a href="' + link + '" target="_blank">' + title + '<br/><img src="'
-            + imgsrc + '"/></a></div>';
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-
+        var contentString = '<div id="content" class="text-center">' +
+            '<strong>' + title + '</strong><br/>' +
+            '<span style="font-size: 80%">' + this.formatTime(photo.datetaken) + '</span><br/>' +
+            '<a href="' + link + '" target="_blank"><img src="' + imgsrc + '"/></a>' +
+            '</div>';
         var marker = new google.maps.Marker({
             position: latlng,
             map: gmap.map,
@@ -215,8 +229,10 @@ var gmap = {
             shadow: gmap.shadow,
             icon: gmap.image
         });
+        var self = this;
         google.maps.event.addListener(marker, 'click', function () {
-            infowindow.open(gmap.map, marker);
+            self.infowindow.setContent(contentString);
+            self.infowindow.open(gmap.map, marker);
         });
     }
 };
