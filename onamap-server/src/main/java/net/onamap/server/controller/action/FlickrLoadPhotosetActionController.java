@@ -130,10 +130,16 @@ public class FlickrLoadPhotosetActionController extends
             Photo photoFromLocalDB = photosByIdInDBMap.get(flickrPhotoId);
 
             final boolean photoInDBWasNull = (photoFromLocalDB == null);
-            final boolean photoLocationWasNull = (photoFromLocalDB.getCityStateCountry() == null);
-            if (photoInDBWasNull || photoLocationWasNull) {
+            if (photoInDBWasNull) {
                 //Add to reverse geocode
+                log.info("photo was null, lets make sure we geocode it.");
                 toReverseGeocode.add(flickrPhotoId);
+            } else {
+                final boolean photoLocationWasNull = (photoFromLocalDB.getCityStateCountry() == null);
+                if (photoLocationWasNull) {
+                    log.info("Photo wasn't null, but location was NULL for flickr Photo, so lets geocode it.");
+                    toReverseGeocode.add(flickrPhotoId);
+                }
             }
 
             if (photoInDBWasNull) {
@@ -141,7 +147,6 @@ public class FlickrLoadPhotosetActionController extends
                 photoFromLocalDB = new Photo(remoteFlickrPhoto);
                 photosToUpdate.add(photoFromLocalDB);
             } else {
-                log.info("");
                 final long localDBLastUpdateTime = photoFromLocalDB.getFlickrLastUpdatedTime() * ONE_SECOND_MS;
                 final long remoteFlickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * ONE_SECOND_MS;
                 final boolean isOutDated = (localDBLastUpdateTime <= remoteFlickrPhotoLastUpdateTime);
