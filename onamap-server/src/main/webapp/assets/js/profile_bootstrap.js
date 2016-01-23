@@ -1,3 +1,19 @@
+window.sortByDatetaken = function(a, b) {
+    if (a.datetaken > b.datetaken)
+        return -1;
+    if (a.datetaken < b.datetaken)
+        return 1;
+    // a must be equal to b
+    return 0;
+};
+
+window.photos = [];
+for (var photoId in window.json.photosMap) {
+    var photo = window.json.photosMap[photoId];
+    window.photos.push(photo);
+}
+window.photos.sort(window.sortByDatetaken);
+
 var util = {
     getStatesCount: function () {
         var count = 0;
@@ -275,46 +291,27 @@ var appControllers = angular.module('appControllers', []);
 appControllers.controller('TimelineCtrl', ['$scope', '$rootScope', '$http',
     function ($scope, $rootScope, $http) {
 
-        var photos = [];
-
-        for (var photoId in window.json.photosMap) {
-            var photo = window.json.photosMap[photoId];
-            photos.push(photo);
-        }
-
-        function sortByDate(a, b) {
-            if (a.datetaken > b.datetaken)
-                return -1;
-            if (a.datetaken < b.datetaken)
-                return 1;
-            // a must be equal to b
-            return 0;
-        };
-
+        //Into 3 columns
         $scope.chunk = function (arr, size) {
             var newArr = [];
             for (var i = 0; i < arr.length; i += size) {
                 newArr.push(arr.slice(i, i + size));
             }
             return newArr;
-        }
+        };
 
-        $scope.sort = function (sortType) {
-            if (sortType == 'date') {
-                photos.sort(sortByDate);
-            } else if (sortType == 'date') {
-                photos.sort(sortByDate);
-            }
-
-
-            $scope.photos = photos;
-
-            $scope.rows = $scope.chunk(photos, 3);
-        }
-
-        $scope.sort('date');
+        $scope.photos = window.photos;
+        $scope.rows = $scope.chunk(photos, 3);
 
         $scope.world = {"me": "you"};
 
+    }
+]);
+
+appControllers.controller('StatsCtrl', ['$scope', '$rootScope', '$http',
+    function ($scope, $rootScope, $http) {
+        $scope.data = window.json;
+        $scope.photo = window.photos[0];
+        $scope.photos = window.photos;
     }
 ]);

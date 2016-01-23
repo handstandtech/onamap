@@ -83,6 +83,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
         private String url_sq;
         private String url_s;
+        private String url_m;
         private String title;
         private Double lat;
         private Double lng;
@@ -93,6 +94,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         public PhotoLite(String flickrId, Photo photo, Long placeId) {
             url_sq = photo.getUrl_sq();
             url_s = photo.getUrl_s();
+            url_m = photo.getUrl_m();
             lat = photo.getLatitude();
             lng = photo.getLongitude();
             if (photo.getDatetaken() != null) {
@@ -114,13 +116,12 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
     private void doWork(HttpServletRequest request, User subdomainUser) {
 
-        FlickrUserInfo flickrInfo = subdomainUser.getFlickrInfo();
+        FlickrUserInfo flickrUserInfo = subdomainUser.getFlickrInfo();
         String flickrPhotosetId = subdomainUser.getFlickrPhotosetId();
         log.info("Photoset: " + flickrPhotosetId);
         // Perform Analysis
 
         // Create a map of the photos
-
         int maxPhotosInState = 0;
         Photoset photoset = photosetDao.findPhotoset(flickrPhotosetId);
 
@@ -143,7 +144,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         LocationGroup world = new LocationGroup();
         for (Photo photo : photosByIdInDB) {
             Long placeId = photo.getGmapsId();
-            photosMap.put(photo.getId(), new PhotoLite(flickrInfo.getId(), photo, placeId));
+            photosMap.put(photo.getId(), new PhotoLite(flickrUserInfo.getId(), photo, placeId));
 
             CityStateCountry address = null;
 
@@ -161,7 +162,6 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
                 boolean hasState = !isNullOrEmpty(stateName);
                 boolean hasCity = !isNullOrEmpty(cityName);
 
-//                world.addPhoto(photo);
                 if (hasCountry) {
                     LocationGroup country = world.getPlace(countryName);
                     country.addPhoto(photo);
@@ -190,14 +190,9 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
         Map json = new HashMap();
         json.put("states", UnitedStates.getMap());
-//        gson.toJson(UnitedStates.getMap());
         json.put("photosMap", photosMap);
-//        gson.toJson(photosMap);
         json.put("maxPhotosInState", maxPhotosInState);
-//        gson.toJson(maxPhotosInState);
         json.put("world", world);
-//        gson.toJson(world.getPhotos());
-//        gson.toJson(world.getPlaces());
 
         String jsonString = gson.toJson(json);
 

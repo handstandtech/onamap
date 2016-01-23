@@ -8,10 +8,13 @@
 
   <link href="/assets/css/profile.css" rel="stylesheet" type="text/css"/>
   <style>#content > div {
+    position: absolute;
+    left: 0px;
+    top: 0px;
     width: 100%;
     height: 100%;
+    overflow: auto;
     background: white;
-    position: absolute;
   }</style>
 
 </onamap:head>
@@ -28,13 +31,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">${USERNAME}</a>
+      <a class="navbar-brand" href="#" onclick="showTab(0);return false;">${USERNAME}</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#" onclick="showTab(0);return false;">US States</a></li>
-        <li><a href="#" onclick="showTab(1);return false;">Timeline</a></li>
-        <!--li><a href="#" onclick="showTab(2);return false;">Stats</a></li-->
+        <li><a href="#" onclick="showTab(1);return false;">US States</a></li>
+        <li><a href="#" onclick="showTab(2);return false;">Timeline</a></li>
         <li><a href="#" onclick="showTab(3);return false;">World Map</a></li>
 
       </ul>
@@ -65,9 +67,41 @@
   <tr class="middle">
     <td id="tdcontent">
       <div id="content">
+        <div id="stats" ng-controller="StatsCtrl">
+          <br/>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <strong>Latest Photo</strong>
+                <br/>
+                <a ng-href="{{photo.link}}" target="_blank">
+                  <img ng-src="{{photo.url_m}}" class="img-thumbnail"/>
+                </a>
+                <br/>
+              </div>
+              <div class="col-xs-6">
+                <strong>Countries</strong>
+                <ul>
+                  <li ng-repeat="(countryName, country) in data.world.places">
+                    <span>{{countryName}} - {{country.photos.length}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xs-6">
+                <strong>US States</strong>
+                <ul>
+                  <li ng-repeat="(stateName, state) in data.world.places['United States'].places">
+                    <span>{{stateName}} - {{state.photos.length}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
         <div id="us-map-svg"></div>
         <div id="timeline" ng-controller="TimelineCtrl">
           <h3 class="text-center">Total Photo Count: {{photos.length}}</h3>
+
           <div class="row" ng-repeat="row in rows">
             <div class="col-sm-4" ng-repeat="photo in row track by $index">
               <div class="text-center" style="padding:10px;">
@@ -82,15 +116,6 @@
             </div>
           </div>
         </div>
-        <!--div id="stats">
-          <div class="row">
-            <strong>hi</strong>
-            <br/>
-            <pre>{{photos | json}} adsfa</pre>
-            <br/>
-            <strong>bye</strong>
-          </div>
-        </div-->
         <div id="google-map"></div>
       </div>
     </td>
@@ -111,7 +136,7 @@
   <script src="/assets/js/maps-svg/us-map-svg.js"></script>
   <script type="text/javascript">
     var json = <c:out value='${json}' escapeXml="false"/>;
-    <onamap:mock></onamap:mock >
+    <%--onamap:mock></onamap:mock--%>
   </script>
   <script src="/assets/js/profile_bootstrap.js"></script>
 </onamap:scripts>
