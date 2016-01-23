@@ -87,29 +87,29 @@ public class FlickrLoadPhotosetActionController extends
         FlickrHelper flickr = FlickrConstants.createFlickrHelper(
                 flickrInfo.getToken(), flickrInfo.getTokenSecret());
 
-        FlickrPhotosetInfo photosetInfo = getPhotosetInfo(request, flickrPhotosetId);
+        FlickrPhotosetInfo remotePhotosetInfo = getPhotosetInfo(request, flickrPhotosetId);
 
         // Create our photoset and add to db
-        Photoset photoset = photosetDao.findPhotosetByFlickrId(flickrPhotosetId);
-        if (photoset == null) {
-            photoset = new Photoset();
-            photoset.setId(flickrPhotosetId);
+        Photoset localPhotoset = photosetDao.findPhotosetByFlickrId(flickrPhotosetId);
+        if (localPhotoset == null) {
+            localPhotoset = new Photoset();
+            localPhotoset.setId(flickrPhotosetId);
         }
 
-        if (photosetInfo != null) {
-            photoset.setTitle(photosetInfo.getTitle().get_content());
-            photoset.setDescription(photosetInfo.getDescription().get_content());
-            photoset.setCount(photosetInfo.getPhotos());
+        if (remotePhotosetInfo != null) {
+            localPhotoset.setTitle(remotePhotosetInfo.getTitle().get_content());
+            localPhotoset.setDescription(remotePhotosetInfo.getDescription().get_content());
+            localPhotoset.setCount(remotePhotosetInfo.getPhotos());
         }
 
-        List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
+        List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, remotePhotosetInfo);
         log.info("Total Photo Count from Remote Flickr: " + allFlickrPhotosInPhotoset.size());
 
         List<String> photoIds = getPhotoIdsFromPhotoset(allFlickrPhotosInPhotoset);
 
-        photoset.setUserId(user.getId());
-        photoset.setPhotoIds(photoIds);
-        photosetDao.updatePhotoset(photoset);
+        localPhotoset.setUserId(user.getId());
+        localPhotoset.setPhotoIds(photoIds);
+        photosetDao.updatePhotoset(localPhotoset);
 
         user.setFlickrPhotosetId(flickrPhotosetId);
         Long userId = userDao.updateUser(user);
