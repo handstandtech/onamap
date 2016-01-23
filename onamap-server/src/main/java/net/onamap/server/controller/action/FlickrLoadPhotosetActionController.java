@@ -75,7 +75,7 @@ public class FlickrLoadPhotosetActionController extends
             response, @QueryParam("id") String flickrPhotosetId) {
         List<String> toReverseGeocode = new ArrayList<String>();
 
-        log.info("PHOTOSET: " + flickrPhotosetId);
+        log.info("Processing Photoset ID: " + flickrPhotosetId);
         User user = SessionHelper.getCurrentUser(request);
         FlickrUserInfo flickrInfo = user.getFlickrInfo();
         if (flickrInfo == null || isNullOrEmpty(flickrPhotosetId)) {
@@ -103,7 +103,7 @@ public class FlickrLoadPhotosetActionController extends
         }
 
         List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
-        log.info("allFlickrPhotosInPhotoset: " + gson.toJson(allFlickrPhotosInPhotoset));
+        log.info("Total Photo Count from Remote Flickr: " + allFlickrPhotosInPhotoset.size());
 
         List<String> photoIds = getPhotoIdsFromPhotoset(allFlickrPhotosInPhotoset);
 
@@ -146,9 +146,8 @@ public class FlickrLoadPhotosetActionController extends
                 final long remoteFlickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * ONE_SECOND_MS;
                 final boolean isOutDated = (localDBLastUpdateTime <= remoteFlickrPhotoLastUpdateTime);
                 if (isOutDated) {
-                    log.info("Photo exists in DB and is outdated.  Photo to be updated: flickrPhotoId: " + flickrPhotoId + " | localDBLastUpdateTime: " + new Date(localDBLastUpdateTime) + " | remoteFlickrPhotoLastUpdateTime: " + new Date(remoteFlickrPhotoLastUpdateTime));
+                    log.info("Photo exists in DB and is outdated.  Photo to be updated: flickrPhotoId: " + flickrPhotoId + " | localDBLastUpdateTime: " + new Date(localDBLastUpdateTime) + " | remoteFlickrPhotoLastUpdateTime: " + new Date(remoteFlickrPhotoLastUpdateTime) + " setting flickPhoto as remote info, remoteFlickrPhoto: " + gson.toJson(remoteFlickrPhoto));
                     //In DB, but outdated.
-                    log.info("Local Photo was out of date, setting flickPhoto as remote info, remoteFlickrPhoto: " + gson.toJson(remoteFlickrPhoto));
                     photoFromLocalDB.setFlickrPhoto(remoteFlickrPhoto);
                     photosToUpdate.add(photoFromLocalDB);
                 }
@@ -176,7 +175,6 @@ public class FlickrLoadPhotosetActionController extends
     }
 
     private List<FlickrPhoto> getAllFlickrPhotosInPhotoset(FlickrHelper flickr, FlickrPhotosetInfo photosetInfo) {
-        log.info("getAllFlickrPhotosInPhotoset: " + photosetInfo);
         List<FlickrPhoto> flickrPhotos = new ArrayList<FlickrPhoto>();
         Integer photosCount = photosetInfo.getPhotos();
         Integer count = 0;
