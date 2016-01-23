@@ -49,7 +49,7 @@ public class OnAMapHTTPResource {
 
         String subdomain = SubdomainHelper.getSubdomain(request);
         if (subdomain != null && !subdomain.isEmpty() && !subdomain.equalsIgnoreCase("www")) {
-            Response res = showProfile(request, subdomain);
+            Response res = showProfile(request, response, subdomain);
             if (res != null) {
                 return res;
             }
@@ -87,21 +87,21 @@ public class OnAMapHTTPResource {
     public Response welcome(@Context HttpServletRequest request,
                             @Context HttpServletResponse response,
                             @PathParam("username") String subdomain) {
-        Response res = showProfile(request, subdomain);
+        Response res = showProfile(request, response, subdomain);
         if (res != null) {
             return res;
         }
         return Response.temporaryRedirect(URI.create(Urls.HOME)).build();
     }
 
-    public Response showProfile(HttpServletRequest request, String subdomain) {
-        RequestHelper.set(request, RequestParams.USERNAME,
-                subdomain);
+    public Response showProfile(HttpServletRequest request, HttpServletResponse response, String subdomain) {
         UserDAOImpl userDAO = new UserDAOImpl();
         System.out.println("SUBDOMAIN [" + subdomain + "]");
         User subdomainUser = userDAO.findUserByUsername(subdomain);
         // Honor the subdomain!
         if (subdomainUser != null) {
+            RequestHelper.set(request, RequestParams.USERNAME,
+                    subdomain);
             RequestHelper.set(request, RequestParams.SUBDOMAIN,
                     subdomain);
             new CalculatePhotosetStatsActionController().doGet(subdomainUser, request);
