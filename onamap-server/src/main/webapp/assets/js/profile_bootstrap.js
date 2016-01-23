@@ -1,4 +1,8 @@
-window.sortByDatetaken = function(a, b) {
+window.MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+window.sortByDatetaken = function (a, b) {
     if (a.datetaken > b.datetaken)
         return -1;
     if (a.datetaken < b.datetaken)
@@ -10,9 +14,33 @@ window.sortByDatetaken = function(a, b) {
 window.photos = [];
 for (var photoId in window.json.photosMap) {
     var photo = window.json.photosMap[photoId];
+    photo.id = photoId;
     window.photos.push(photo);
 }
 window.photos.sort(window.sortByDatetaken);
+
+
+window.photosByDate = {};
+for (var i = 0; i < window.photos.length; i++) {
+    var photo = window.photos[i];
+    var photoId = photo.id;
+    var d = new Date(photo.datetaken),
+        monthNum = d.getMonth(),
+        monthName = MONTH_NAMES[monthNum],
+        fullYear = d.getFullYear() + "";
+    var year = window.photosByDate[fullYear];
+    if (year == undefined) {
+        year = {photos: [], months: []};
+        for (var j = 0; j < MONTH_NAMES.length; j++) {
+            year.months[j] = {name: MONTH_NAMES[j], photos: []};
+        }
+    }
+    year.photos.push(photoId);
+    var month = year.months[monthNum];
+    month.photos.push(photoId);
+    year.months[monthName] = month;
+    window.photosByDate[fullYear] = year;
+}
 
 var util = {
     getStatesCount: function () {
@@ -40,11 +68,7 @@ var util = {
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
 
-        var monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        return monthNames[month] + " " + day + ", " + year;
+        return window.MONTH_NAMES[month] + " " + day + ", " + year;
     }
 };
 
@@ -312,5 +336,6 @@ appControllers.controller('StatsCtrl', ['$scope', '$rootScope', '$http',
         $scope.photo = window.photos[0];
         $scope.datetaken = util.formatTime($scope.photo.datetaken);
         $scope.photos = window.photos;
+        $scope.photosByDate = window.photosByDate;
     }
 ]);

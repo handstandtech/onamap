@@ -71,7 +71,7 @@
           <br/>
 
           <div class="container">
-            <div class="row">
+            <div class="row" style="font-size: 80%;">
               <div class="col-xs-12 text-center">
                 <span>Latest Photo</span> on <span style="font-size: 80%">{{datetaken}}</span><br/>
                 <strong>{{photo.title}}</strong>
@@ -82,7 +82,7 @@
                 </a>
                 <br/><br/>
               </div>
-              <div class="col-xs-6">
+              <div class="col-xs-4">
                 <strong>Countries</strong>
                 <ul>
                   <li ng-repeat="(countryName, country) in data.world.places">
@@ -90,11 +90,24 @@
                   </li>
                 </ul>
               </div>
-              <div class="col-xs-6">
+              <div class="col-xs-4">
                 <strong>US States</strong>
                 <ul>
                   <li ng-repeat="(stateName, state) in data.world.places['United States'].places">
                     <span>{{stateName}} - {{state.photos.length}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xs-4">
+                <strong>By Date</strong>
+                <ul>
+                  <li ng-repeat="(fullYear, year) in photosByDate">
+                    <span>{{fullYear}} - {{year.photos.length}}</span>
+                    <span ng-repeat="month in year.months track by $index" ng-show="year.months[$index].photos.length>0">
+                    <ul>
+                      <li>{{month.name}} - {{month.photos.length}}</li>
+                    </ul>
+                    </span>
                   </li>
                 </ul>
               </div>
