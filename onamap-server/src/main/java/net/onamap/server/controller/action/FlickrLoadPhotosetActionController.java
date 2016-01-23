@@ -140,18 +140,15 @@ public class FlickrLoadPhotosetActionController extends
                 //Not in DB
                 photoFromLocalDB = new Photo(remoteFlickrPhoto);
             } else {
-                log.info("Photo exists in DB.");
+                log.info("");
                 final long localDBLastUpdateTime = photoFromLocalDB.getFlickrLastUpdatedTime() * ONE_SECOND_MS;
-                final long rempoteFlickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * ONE_SECOND_MS;
-                log.info("Photo to be updated: flickrPhotoId: " + flickrPhotoId + " | localDBLastUpdateTime: " + new Date(localDBLastUpdateTime) + " | remoteFlickrPhotoLastUpdateTime: " + new Date(rempoteFlickrPhotoLastUpdateTime));
-
-                final boolean isOutDated = (localDBLastUpdateTime < rempoteFlickrPhotoLastUpdateTime);
-                log.info("isOutDated: " + isOutDated);
+                final long remoteFlickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * ONE_SECOND_MS;
+                final boolean isOutDated = (localDBLastUpdateTime < remoteFlickrPhotoLastUpdateTime);
                 if (isOutDated) {
+                    log.info("Photo exists in DB and is outdated.  Photo to be updated: flickrPhotoId: " + flickrPhotoId + " | localDBLastUpdateTime: " + new Date(localDBLastUpdateTime) + " | remoteFlickrPhotoLastUpdateTime: " + new Date(remoteFlickrPhotoLastUpdateTime));
                     //In DB, but outdated.
-                    log.info("Local Photo was out of date, setting flickPhoto as remote info");
+                    log.info("Local Photo was out of date, setting flickPhoto as remote info, remoteFlickrPhoto: " + gson.toJson(remoteFlickrPhoto));
                     photoFromLocalDB.setFlickrPhoto(remoteFlickrPhoto);
-                    log.info("remoteFlickrPhoto: " + gson.toJson(remoteFlickrPhoto));
                 }
             }
 
