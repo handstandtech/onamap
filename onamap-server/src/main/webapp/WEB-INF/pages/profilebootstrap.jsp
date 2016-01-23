@@ -69,15 +69,18 @@
       <div id="content">
         <div id="stats" ng-controller="StatsCtrl">
           <br/>
+
           <div class="container">
             <div class="row">
               <div class="col-xs-12 text-center">
-                <strong>Latest Photo</strong>
+                <span>Latest Photo</span> on <span style="font-size: 80%">{{datetaken}}</span><br/>
+                <strong>{{photo.title}}</strong>
+                <br/>
                 <br/>
                 <a ng-href="{{photo.link}}" target="_blank">
                   <img ng-src="{{photo.url_m}}" class="img-thumbnail"/>
                 </a>
-                <br/>
+                <br/><br/>
               </div>
               <div class="col-xs-6">
                 <strong>Countries</strong>
@@ -136,7 +139,9 @@
   <script src="/assets/js/maps-svg/us-map-svg.js"></script>
   <script type="text/javascript">
     var json = <c:out value='${json}' escapeXml="false"/>;
-    <%--onamap:mock></onamap:mock--%>
+    <c:if test="${not empty param.mock}">
+    <onamap:mock></onamap:mock>
+    </c:if>
   </script>
   <script src="/assets/js/profile_bootstrap.js"></script>
 </onamap:scripts>

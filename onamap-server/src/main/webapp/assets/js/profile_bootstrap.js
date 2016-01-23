@@ -30,6 +30,21 @@ var util = {
     colorToHex: function (red, green, blue) {
         var rgb = blue | (green << 8) | (red << 16);
         return '#' + rgb.toString(16);
+    },
+    formatTime: function (time) {
+        var d = new Date(time),
+            month = d.getMonth(),
+            day = d.getDate() ,
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        return monthNames[month] + " " + day + ", " + year;
     }
 };
 
@@ -211,21 +226,6 @@ var gmap = {
         google.maps.event.trigger(gmap.map, 'resize');
     },
     infowindow: new google.maps.InfoWindow({content: ""}),
-    formatTime: function (time) {
-        var d = new Date(time),
-            month = d.getMonth(),
-            day = d.getDate() ,
-            year = d.getFullYear();
-
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-
-        var monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        return monthNames[month] + " " + day + ", " + year;
-    },
     image: new google.maps.MarkerImage(
         '/assets/img/mm_20_red.png'),
     shadow: new google.maps.MarkerImage(
@@ -235,7 +235,7 @@ var gmap = {
         var latlng = new google.maps.LatLng(lat, lng);
         var contentString = '<div id="content" class="text-center">' +
             '<strong>' + title + '</strong><br/>' +
-            '<span style="font-size: 80%">' + this.formatTime(photo.datetaken) + '</span><br/>' +
+            '<span style="font-size: 80%">' + util.formatTime(photo.datetaken) + '</span><br/>' +
             '<a href="' + link + '" target="_blank"><img src="' + imgsrc + '"/></a>' +
             '</div>';
         var marker = new google.maps.Marker({
@@ -303,8 +303,6 @@ appControllers.controller('TimelineCtrl', ['$scope', '$rootScope', '$http',
         $scope.photos = window.photos;
         $scope.rows = $scope.chunk(photos, 3);
 
-        $scope.world = {"me": "you"};
-
     }
 ]);
 
@@ -312,6 +310,7 @@ appControllers.controller('StatsCtrl', ['$scope', '$rootScope', '$http',
     function ($scope, $rootScope, $http) {
         $scope.data = window.json;
         $scope.photo = window.photos[0];
+        $scope.datetaken = util.formatTime($scope.photo.datetaken);
         $scope.photos = window.photos;
     }
 ]);
