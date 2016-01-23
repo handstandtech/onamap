@@ -15,7 +15,12 @@
     height: 100%;
     overflow: auto;
     background: white;
-  }</style>
+  }
+
+  #timeline img.img-thumbnail {
+    max-height: 250px;
+  }
+  </style>
 
 </onamap:head>
 
@@ -122,7 +127,7 @@
             <div class="col-sm-4" ng-repeat="photo in row track by $index">
               <div class="text-center" style="padding:10px;">
                 <a ng-href="{{photo.link}}" target="_blank">
-                  <img ng-src="{{photo.url_s}}" class="img-thumbnail"/>
+                  <img ng-src="{{photo.url_m}}" class="img-thumbnail"/>
                 </a>
 
                 <div>
@@ -138,7 +143,7 @@
   </tr>
   <tr>
     <td>
-      <div id="bottom">Bottom</div>
+      <div id="bottom"></div>
     </td>
   </tr>
   </tbody>

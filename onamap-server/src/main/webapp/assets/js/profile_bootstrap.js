@@ -108,6 +108,13 @@ var usMap = {
         }, function () {
             $(window).resize();
         });
+        $(bottom).click(function(){
+            bottom.animate({
+                height: 0
+            }, function () {
+                $(window).resize();
+            });
+        });
         bottom.empty();
         var theUs = json.world.places['United States'];
         var theState = theUs.places[stateName];
@@ -282,7 +289,6 @@ $(function () {
     usMap.init();
     gmap.init();
     var content = $("#content");
-//    var tabs = $("ul#tabs li");
 
     window.showTab = function (idx) {
         content.find(">div").each(function () {
@@ -294,13 +300,7 @@ $(function () {
             zIndex: 100
         });
         gmap.reset();
-    }
-
-//    tabs.click(function () {
-//        var clicked = $(this);
-//        var idx = tabs.index(clicked);
-//        showTab(idx);
-//    });
+    };
 
     showTab(0);
     setTimeout(function () {
