@@ -125,10 +125,10 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
         Photoset photoset = photosetDao.findPhotoset(flickrPhotosetId);
 
 
-        Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoset.getPhotoIds());
+        Collection<Photo> photosByIdInDB = photoDao.getPhotosByIds(photoset.getPhotoIds());
 
         HashSet<Long> placeIds = new HashSet<>();
-        for (Photo photo : photosByIdInDB.values()) {
+        for (Photo photo : photosByIdInDB) {
             Long placeId = photo.getGmapsId();
             if (placeId != null) {
                 placeIds.add(placeId);
@@ -140,7 +140,7 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
         Map<String, PhotoLite> photosMap = new HashMap<String, PhotoLite>();
         LocationGroup world = new LocationGroup();
-        for (Photo photo : photosByIdInDB.values()) {
+        for (Photo photo : photosByIdInDB) {
             Long placeId = photo.getGmapsId();
             photosMap.put(photo.getId(), new PhotoLite(flickrInfo.getId(), photo, placeId));
 

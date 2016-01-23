@@ -34,10 +34,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SuppressWarnings("serial")
 @Singleton
@@ -46,6 +43,7 @@ import java.util.Map;
 public class FlickrLoadPhotosetActionController extends
         RequiresLoginAbstractController {
 
+    private static final long ONE_SECOND_MS = 1000;
     private static UserDAOImpl userDao = new UserDAOImpl();
     private static PhotosetDAOImpl photosetDao = new PhotosetDAOImpl();
     private static PhotoDAOImpl photoDao = new PhotoDAOImpl();
@@ -105,6 +103,7 @@ public class FlickrLoadPhotosetActionController extends
         }
 
         List<FlickrPhoto> allFlickrPhotosInPhotoset = getAllFlickrPhotosInPhotoset(flickr, photosetInfo);
+        log.info("allFlickrPhotosInPhotoset: " + gson.toJson(allFlickrPhotosInPhotoset));
 
         List<String> photoIds = getPhotoIdsFromPhotoset(allFlickrPhotosInPhotoset);
 
@@ -117,13 +116,18 @@ public class FlickrLoadPhotosetActionController extends
         user = userDao.findUser(userId);
         SessionHelper.setCurrentUser(user, request, response);
 
-        Map<String, Photo> photosByIdInDB = photoDao.getPhotosByIds(photoIds);
+        Collection<Photo> photosByIdInDBList = photoDao.getPhotosByIds(photoIds);
+        Map<String, Photo> photosByIdInDBMap = new HashMap<>();
+        for (Photo photo : photosByIdInDBList) {
+            photosByIdInDBMap.put(photo.getId(), photo);
+        }
+
         List<Photo> photosToUpdate = new ArrayList<Photo>();
         for (FlickrPhoto remoteFlickrPhoto : allFlickrPhotosInPhotoset) {
             String flickrPhotoId = remoteFlickrPhoto.getId();
 
             // Get the photo out of the database
-            Photo photoFromLocalDB = photosByIdInDB.get(flickrPhotoId);
+            Photo photoFromLocalDB = photosByIdInDBMap.get(flickrPhotoId);
 
             final boolean photoInDBWasNull = (photoFromLocalDB == null);
             final boolean photoLocationWasNull = (photoFromLocalDB.getCityStateCountry() == null);
@@ -136,15 +140,16 @@ public class FlickrLoadPhotosetActionController extends
                 //Not in DB
                 photoFromLocalDB = new Photo(remoteFlickrPhoto);
             } else {
-                Date localDBLastUpdateDate = photoFromLocalDB.getLastUpdated();
-                final long localDBLastUpdateTime = localDBLastUpdateDate.getTime();
-                final long flickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * 1000;
-                log.info("flickrPhotoId" + flickrPhotoId + " | localDBLastUpdateTime: " + localDBLastUpdateTime + " | flickrPhotoLastUpdateTime: " + flickrPhotoLastUpdateTime);
+                log.info("Photo exists in DB.");
+                final long localDBLastUpdateTime = photoFromLocalDB.getFlickrLastUpdatedTime() * ONE_SECOND_MS;
+                final long rempoteFlickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * ONE_SECOND_MS;
+                log.info("Photo to be updated: flickrPhotoId: " + flickrPhotoId + " | localDBLastUpdateTime: " + new Date(localDBLastUpdateTime) + " | remoteFlickrPhotoLastUpdateTime: " + new Date(rempoteFlickrPhotoLastUpdateTime));
 
-                final boolean isOutDated = (flickrPhotoLastUpdateTime < localDBLastUpdateTime);
+                final boolean isOutDated = (localDBLastUpdateTime < rempoteFlickrPhotoLastUpdateTime);
                 log.info("isOutDated: " + isOutDated);
-                if (!isOutDated) {
+                if (isOutDated) {
                     //In DB, but outdated.
+                    log.info("Local Photo was out of date, setting flickPhoto as remote info");
                     photoFromLocalDB.setFlickrPhoto(remoteFlickrPhoto);
                     log.info("remoteFlickrPhoto: " + gson.toJson(remoteFlickrPhoto));
                 }
@@ -153,6 +158,7 @@ public class FlickrLoadPhotosetActionController extends
             photosToUpdate.add(photoFromLocalDB);
         }
 
+        log.info("Updating " + photosToUpdate.size() + " photos.");
         photoDao.updatePhotos(photosToUpdate);
         request.setAttribute("photos", allFlickrPhotosInPhotoset);
 
