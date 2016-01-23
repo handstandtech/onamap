@@ -127,16 +127,17 @@ public class CalculatePhotosetStatsActionController extends AbstractController {
 
         Collection<Photo> photosByIdInDB = photoDao.getPhotosByIds(photoset.getPhotoIds());
 
-        HashSet<Long> placeIds = new HashSet<>();
+        HashSet<Long> gmapsIds = new HashSet<>();
         for (Photo photo : photosByIdInDB) {
-            Long placeId = photo.getGmapsId();
-            if (placeId != null) {
-                placeIds.add(placeId);
+            if (photo != null) {
+                Long gmapsId = photo.getGmapsId();
+                if (gmapsId != null) {
+                    gmapsIds.add(gmapsId);
+                }
             }
         }
 
-        Map<Long, GMapsModel> gMapsModelMap = new GMapsModelDAOImpl().getByIds(placeIds);
-
+        Map<Long, GMapsModel> gMapsModelMap = new GMapsModelDAOImpl().getByIds(gmapsIds);
 
         Map<String, PhotoLite> photosMap = new HashMap<String, PhotoLite>();
         LocationGroup world = new LocationGroup();
