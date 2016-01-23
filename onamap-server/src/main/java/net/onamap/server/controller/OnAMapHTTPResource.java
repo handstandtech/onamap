@@ -89,14 +89,14 @@ public class OnAMapHTTPResource {
                             @PathParam("username") String subdomain) {
         Response res = showProfile(request, subdomain);
         if (res != null) {
-            RequestHelper.set(request, RequestParams.USERNAME,
-                    subdomain);
             return res;
         }
         return Response.temporaryRedirect(URI.create(Urls.HOME)).build();
     }
 
     public Response showProfile(HttpServletRequest request, String subdomain) {
+        RequestHelper.set(request, RequestParams.USERNAME,
+                subdomain);
         UserDAOImpl userDAO = new UserDAOImpl();
         System.out.println("SUBDOMAIN [" + subdomain + "]");
         User subdomainUser = userDAO.findUserByUsername(subdomain);
