@@ -139,20 +139,21 @@ public class FlickrLoadPhotosetActionController extends
             if (photoInDBWasNull) {
                 //Not in DB
                 photoFromLocalDB = new Photo(remoteFlickrPhoto);
+                photosToUpdate.add(photoFromLocalDB);
             } else {
                 log.info("");
                 final long localDBLastUpdateTime = photoFromLocalDB.getFlickrLastUpdatedTime() * ONE_SECOND_MS;
                 final long remoteFlickrPhotoLastUpdateTime = remoteFlickrPhoto.getLastupdate() * ONE_SECOND_MS;
-                final boolean isOutDated = (localDBLastUpdateTime < remoteFlickrPhotoLastUpdateTime);
+                final boolean isOutDated = (localDBLastUpdateTime <= remoteFlickrPhotoLastUpdateTime);
                 if (isOutDated) {
                     log.info("Photo exists in DB and is outdated.  Photo to be updated: flickrPhotoId: " + flickrPhotoId + " | localDBLastUpdateTime: " + new Date(localDBLastUpdateTime) + " | remoteFlickrPhotoLastUpdateTime: " + new Date(remoteFlickrPhotoLastUpdateTime));
                     //In DB, but outdated.
                     log.info("Local Photo was out of date, setting flickPhoto as remote info, remoteFlickrPhoto: " + gson.toJson(remoteFlickrPhoto));
                     photoFromLocalDB.setFlickrPhoto(remoteFlickrPhoto);
+                    photosToUpdate.add(photoFromLocalDB);
                 }
             }
 
-            photosToUpdate.add(photoFromLocalDB);
         }
 
         log.info("Updating " + photosToUpdate.size() + " photos.");
